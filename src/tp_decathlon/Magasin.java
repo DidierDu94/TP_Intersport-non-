@@ -8,4 +8,8 @@ package tp_decathlon;
 
 public class Magasin {
     
+    public void teste_E(){
+        int f;
+    }
+    
 }

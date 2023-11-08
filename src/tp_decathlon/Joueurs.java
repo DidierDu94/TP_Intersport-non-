@@ -12,5 +12,5 @@ public class Joueurs {
     
     private String taille;
     private String coloris;
-    
+
 }
