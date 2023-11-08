@@ -2,7 +2,7 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
-public class Equipement {
+public class Equipement {       // Classe mère
     
     // Attributs
     
@@ -13,6 +13,7 @@ public class Equipement {
     private int nbExmpl;
     
     // Constructeur
+    
     public Equipement(String ref, String sport, String nom, float prix, int nbExmpl){
         
         this.ref = ref;

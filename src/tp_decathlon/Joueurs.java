@@ -2,20 +2,24 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
-public class Joueurs extends Equipement{
+public class Joueurs extends Equipement{        // Super classe de ProtectionJoueurs
     
     //Attributs
-    private int taille;
+    
+    private String taille;
     private String coloris;
     
-    //Constructeurs
-    public Joueurs(String ref, String sport, String nom, float prix, int nbExmpl,char taille, String coloris){
+    //Constructeur
+    
+    public Joueurs(String ref, String sport, String nom, float prix, int nbExmpl, String taille, String coloris){
         
-        super(ref,sport,nom,prix,nbExmpl);
+        super(ref, sport, nom, prix, nbExmpl);
+        
         this.taille = taille;
         this.coloris = coloris;
           
     }
     
+    // Méthode toString()
     
 }
