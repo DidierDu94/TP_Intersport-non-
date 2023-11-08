@@ -22,4 +22,9 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
     
     // Méthode toString()
     
+    @Override
+    public String toString(){
+        
+        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + taille + " " + coloris;   
+    }
 }

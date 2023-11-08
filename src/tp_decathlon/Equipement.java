@@ -27,6 +27,7 @@ public class Equipement {       // Classe mère
     
     @Override
     public String toString(){
+        
         return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl;
     }
    

@@ -18,4 +18,11 @@ public class ProtectionJoueurs extends Joueurs{
     
     // Méthode toString()
     
+    @Override
+    public String toString(){
+        
+        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + taille + " " + coloris + " " + niveau;
+          
+    }
+    
 }
