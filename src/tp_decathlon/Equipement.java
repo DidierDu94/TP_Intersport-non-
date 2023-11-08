@@ -5,6 +5,7 @@ package tp_decathlon;
 public class Equipement {
     
     // Attributs
+    
     private String ref;
     private String sport;
     private String nom;
@@ -30,6 +31,3 @@ public class Equipement {
    
     
 }
-
-
-

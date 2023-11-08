@@ -15,8 +15,17 @@ public class Terrain extends Equipement{
         super(ref,sport,nom,prix,nbExmpl);
         this.hauteur = hauteur;
         this.largeur = largeur;
-        this.poids = poids;    
+        this.poids = poids;
     }
     
+    public Terrain(String ref, String sport, String nom, float prix, int nbExmpl, float poids){
+        
+        super(ref, sport, nom, prix, nbExmpl);
+        
+        this.poids = poids;
+        
+    }
     
 }
+    
+
