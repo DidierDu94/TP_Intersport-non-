@@ -30,6 +30,10 @@ public class Equipement {
     public String toString(){
         return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl;
     }
+    public void test_A(){
+        int a;
+    
+}
     
 }
 

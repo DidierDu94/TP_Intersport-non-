@@ -8,4 +8,7 @@ package tp_decathlon;
 
 public class Joueurs {
     
+    public void test_C(){
+        int c;
+    }
 }

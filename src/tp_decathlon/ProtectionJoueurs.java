@@ -8,4 +8,7 @@ package tp_decathlon;
 
 public class ProtectionJoueurs {
     
+    public void test_E(){
+        int r;
+    }
 }
