@@ -8,8 +8,6 @@ package tp_decathlon;
 
 public class Commande {
     
-    public void test_B(){
-        int b;
-    }
+    
     
 }

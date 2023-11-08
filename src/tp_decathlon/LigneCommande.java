@@ -8,9 +8,7 @@ package tp_decathlon;
 
 public class LigneCommande {
     
-    public void test_D(){
-         int d;
-    }
+    
     
     
 }
