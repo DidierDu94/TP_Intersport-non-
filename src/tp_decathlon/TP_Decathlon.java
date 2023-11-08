@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
@@ -18,8 +15,5 @@ public class TP_Decathlon {
         System.out.println(e);
     }
     
-    public void test_Z(){
-        int t;
-    }
     
 }

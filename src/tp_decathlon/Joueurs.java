@@ -1,14 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
-public class Joueurs {
+public class Joueurs extends Equipement{
     
-    public void test_C(){
-        int c;
+    //Attributs
+    private int taille;
+    private String coloris;
+    
+    //Constructeurs
+    public Joueurs(String ref, String sport, String nom, float prix, int nbExmpl,char taille, String coloris){
+        
+        super(ref,sport,nom,prix,nbExmpl);
+        this.taille = taille;
+        this.coloris = coloris;
+          
     }
+    
+    
 }
