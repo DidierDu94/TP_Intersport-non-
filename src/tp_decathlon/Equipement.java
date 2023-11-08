@@ -17,7 +17,7 @@ public class Equipement {
     private int nbExmpl;
     
     // Constructeur
-    
+    //Ajout commentaire
     public Equipement(String ref, String sport, String nom, float prix, int nbExmpl){
         this.ref = ref;
         this.sport = sport;
@@ -32,5 +32,9 @@ public class Equipement {
     public String toString(){
         return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl;
     }
+    public void test_A(){
+        int a;
+    
+}
     
 }
