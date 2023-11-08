@@ -18,8 +18,6 @@ public class TP_Decathlon {
         System.out.println(e);
     }
     
-    public void test_Z(){
-        int t;
-    }
+    
     
 }
