@@ -6,8 +6,8 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
     
     //Attributs
     
-    private String taille;
-    private String coloris;
+    protected String taille;
+    protected String coloris;
     
     //Constructeur
     

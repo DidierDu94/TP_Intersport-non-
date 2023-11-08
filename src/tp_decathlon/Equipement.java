@@ -6,11 +6,11 @@ public class Equipement {       // Classe mère
     
     // Attributs
     
-    private String ref;
-    private String sport;
-    private String nom;
-    private float prix;
-    private int nbExmpl;
+    protected String ref;
+    protected String sport;
+    protected String nom;
+    protected float prix;
+    protected int nbExmpl;
     
     // Constructeur
     

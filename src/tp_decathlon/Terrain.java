@@ -31,8 +31,9 @@ public class Terrain extends Equipement{
     
     // Méthode toString()
     
+    @Override
     public String toString(){
-        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl;
+        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + poids;
     }
     
 }

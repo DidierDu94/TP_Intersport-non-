@@ -10,9 +10,9 @@ public class TP_Decathlon {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Equipement e;
-        e = new Equipement("ER128", "Escalade", "chausson", 24.99f, 78);
-        System.out.println(e);
+        Terrain t;
+        t = new Terrain("ER128", "Escalade", "chausson", 24.99f, 78, 0.400f);
+        System.out.println(t);
     }
     
     
