@@ -17,7 +17,7 @@ public class Equipement {
     private int nbExmpl;
     
     // Constructeur
-    
+    //Ajout commentaire
     public Equipement(String ref, String sport, String nom, float prix, int nbExmpl){
         this.ref = ref;
         this.sport = sport;

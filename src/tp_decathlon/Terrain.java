@@ -1,28 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
-public class Terrain {
+public class Terrain extends Equipement{
     
-    // Attributs
-    
-    private float poids;
     private float hauteur;
     private float largeur;
+    private float poids;
     
-    // Constructeurs
-    
-    public Terrain(float hauteur, float largeur){
+    public Terrain(String ref, String sport, String nom, float prix, int nbExmpl,float hauteur, float largeur,float poids){
+        
+        super(ref,sport,nom,prix,nbExmpl);
+        
         this.hauteur = hauteur;
         this.largeur = largeur;
+        this.poids = poids;    
     }
     
-    public Terrain(){
-        
+    
     }
     
-}
+
