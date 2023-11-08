@@ -8,4 +8,21 @@ package tp_decathlon;
 
 public class Terrain {
     
+    // Attributs
+    
+    private float poids;
+    private float hauteur;
+    private float largeur;
+    
+    // Constructeurs
+    
+    public Terrain(float hauteur, float largeur){
+        this.hauteur = hauteur;
+        this.largeur = largeur;
+    }
+    
+    public Terrain(){
+        
+    }
+    
 }

@@ -8,4 +8,8 @@ package tp_decathlon;
 
 public class ProtectionJoueurs {
     
+    // Attributs
+    
+    private String niveau;
+    
 }

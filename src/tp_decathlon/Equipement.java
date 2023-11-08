@@ -7,7 +7,9 @@ package tp_decathlon;
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
 public class Equipement {
+    
     // Attributs
+    
     private String ref;
     private String sport;
     private String nom;

@@ -8,4 +8,9 @@ package tp_decathlon;
 
 public class Joueurs {
     
+    // Attributs
+    
+    private String taille;
+    private String coloris;
+    
 }
