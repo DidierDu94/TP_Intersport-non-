@@ -4,11 +4,11 @@ package tp_decathlon;
 
 public class ProtectionJoueurs extends Joueurs{
     
-    // Attributs
+    // Attribut
     
-    private String niveau;
+    private String niveau;              // Niveau de pratique auquel l'équipement est destiné : débutant / régulier / expert
     
-    // Constructeurs
+    // Constructeur
     
     public ProtectionJoueurs(String ref, String sport, String nom, float prix, int nbExmpl, String taille, String coloris, String niveau){
         
@@ -21,7 +21,7 @@ public class ProtectionJoueurs extends Joueurs{
     @Override
     public String toString(){
         
-        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + taille + " " + coloris + " " + niveau;
+        return super.toString() + " " + niveau;
           
     }
     

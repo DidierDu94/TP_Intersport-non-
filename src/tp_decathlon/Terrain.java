@@ -6,9 +6,9 @@ public class Terrain extends Equipement{
     
     //Attributs
     
-    private float hauteur;
-    private float largeur;
-    private float poids;
+    private float hauteur;              // Hauteur (ou longueur) de l'équipement en mètres
+    private float largeur;              // Largeur (ou épaisseur) de l'équipement en mètres
+    private float poids;                // Masse de l'équipement en kilogrammes
     
     //Constructeurs
     
@@ -34,7 +34,7 @@ public class Terrain extends Equipement{
     @Override
     public String toString(){
         
-        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + poids;
+        return super.toString() + " " + hauteur + " " +largeur + " " + poids;
     }
     
 }

@@ -6,11 +6,11 @@ public class Equipement {       // Classe mère
     
     // Attributs
     
-    protected String ref;
-    protected String sport;
-    protected String nom;
-    protected float prix;
-    protected int nbExmpl;
+    private String ref;                 // Référence de l'équipement : 5 caractères
+    private String sport;
+    private String nom;                 // Désignation
+    private float prix;                 // Prix unitaire de l'équipement en euros
+    private int nbExmpl;                // Nombre d'exemplaire de l'équipement en stock
     
     // Constructeur
     

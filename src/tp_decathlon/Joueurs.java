@@ -6,8 +6,8 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
     
     //Attributs
     
-    protected String taille;
-    protected String coloris;
+    private String taille;              // Taille de l'équipement : 3XS / XXS / XS / S / M / M/L / L / XL / XXL / 3XL / 4XL / 5XL
+    private String coloris;             // Coloris de l'équipement (ex : bleu, rouge, transparent...)
     
     //Constructeur
     
@@ -25,6 +25,6 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
     @Override
     public String toString(){
         
-        return ref + " " + sport + " " + nom + " " + prix + " " + nbExmpl + " " + taille + " " + coloris;   
+        return super.toString() + " " + taille + " " + coloris;   
     }
 }
