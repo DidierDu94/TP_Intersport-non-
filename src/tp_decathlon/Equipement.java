@@ -55,11 +55,10 @@ public class Equipement {       // Classe mère
     
     // Autres méthodes
     
-    public boolean placeApres(Equipement otherEquipement){ // On veut retourner un boolean selon l'emplacement de l'équipement dans la liste. Sa place est choisie avec sa référence
+    public boolean placeApres(Equipement autre){
         
-        // Equipement.ref.compareTo(otherEquipement.ref)>0;
-        return true;
-        //return false;    
+        String ref_autre = autre.getref();
+        return        
     }
    
     
