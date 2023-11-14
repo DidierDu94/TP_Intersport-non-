@@ -1,5 +1,5 @@
 package tp_decathlon;
-
+import java.util.Scanner;
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
 public class Magasin {
@@ -53,18 +53,69 @@ public class Magasin {
     }
     
     public Commande[] getlstCmd(){
-    return lstCmd;
+        return lstCmd;
     }
     
     // Autres méthodes
     
-    static public String tableau(Object[] tab){
+    static public String tableau(Object[] tab){  // Méthode renvoyant une String sous forme d'un tableau en affichant un élément par ligne.
         String[] strTab = new String[tab.length];
         for (int i=0 ; i <= tab.length-1 ; i++){
-            strTab[i] = tab[i].toString();
+            strTab[i] = tab[i].toString();       
         }
         String tabGrille = String.join("\n", strTab);
         return tabGrille;
     }
     
-}
+    // Ajout d'un équipement  pour un terrain (2 cas) et protections des joueurs
+    
+    public Terrain ajout_Terr(){
+        
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Quel est le nom du sport ? ");
+        String sport = sc.nextLine();
+        System.out.println("Que voulez-vous acheter ? ");
+        //sc.nextLine();
+        String designation = sc.nextLine();
+        
+        System.out.println("Quel est son prix ? ");
+        float prix = sc.nextFloat();
+        System.out.println("Combien en voulez-vous ? ");
+        int nbExmpl = sc.nextInt();
+        System.out.println("Quel est son poids ? ");
+        float poids = sc.nextFloat();
+        
+        Terrain T;
+        
+        T = new Terrain("TR100",sport,designation,prix,nbExmpl,poids);
+        return T;       
+    }
+    
+    public Terrain ajout_Terr_Size(String ref, String sport, String designation, float prix,int nbExmpl,float poids){
+        
+        Scanner scan = new Scanner( System.in);
+        
+        System.out.println("Quelle est la hauteur du terrain ?");
+        int haut = scan.nextInt();
+        System.out.println("Quelle est sa largeur ? ");
+        int larg = scan.nextInt();
+        
+        Terrain T_size;
+        T_size =  new Terrain("TR200",sport,designation,prix,nbExmpl,poids,haut,larg);
+        
+        return T_size;      
+    }
+    
+    public ProtectionJoueurs ajout_PJ(){
+        
+        
+    }
+    
+    
+    
+    
+    
+    }
+    
+
