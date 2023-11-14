@@ -14,9 +14,9 @@ public class LigneCommande {
     
     public LigneCommande(int nbExempl, Equipement objet){
         
-        this.ref = objet.ref;
+        this.ref = objet.getref();
         this.nbExempl = nbExempl;
-        this.prixUni = objet.prix;
+        this.prixUni = objet.getprix();
         
     }
     
@@ -27,5 +27,20 @@ public class LigneCommande {
         
         return ref + " " + nbExempl + " " + prixUni;
     }
+    
+    // Getters
+    
+    public String getref(){
+        return ref;
+    }
+    
+    public int getnbExempl(){
+        return nbExempl;
+    }
+    
+    public float getprixUni(){
+        return prixUni;
+    }
+    
     
 }

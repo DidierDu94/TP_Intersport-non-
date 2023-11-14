@@ -29,7 +29,7 @@ public class Commande{
         }
         float total = 0.0f;
         for (int i=0;i<=lignes.length-1;i++){
-            total += lignes[i].prix;
+            total += lignes[i].getprix();
         }
         this.total = total;
         this.lignes = lignes;
@@ -40,11 +40,34 @@ public class Commande{
     
     @Override
     public String toString(){
-        String[] strLignes = new String[lignes.length];
-        for (int i=0;i<=lignes.length-1;i++){
-            strLignes[i] = lignes[i].toString();
-        }
-        String tabLignes = String.join("\n", strLignes);
-        return numero + " " + email + " " + emission + " " + livraison + " " + total + "/n" + tabLignes;
+        String tabLignes = Magasin.tableau(lignes);
+        return numero + " " + email + " " + emission + " " + livraison + " " + total + "\n" + tabLignes;
     }
+    
+    // Getters
+    
+    public String getnumero(){
+        return numero;
+    }
+    
+    public String getemail(){
+        return email;
+    }
+    
+    public LocalDate getemission(){
+        return emission;
+    }
+    
+    public LocalDate getlivraison(){
+        return livraison;
+    }
+    
+    public float gettotal(){
+        return total;
+    }
+    
+    public Equipement[] getlignes(){
+        return lignes;
+    }
+    
 }

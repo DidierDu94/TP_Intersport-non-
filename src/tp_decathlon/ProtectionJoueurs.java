@@ -25,4 +25,10 @@ public class ProtectionJoueurs extends Joueurs{
           
     }
     
+    // Getter
+    
+    public String getniveau(){
+        return niveau;
+    }
+    
 }

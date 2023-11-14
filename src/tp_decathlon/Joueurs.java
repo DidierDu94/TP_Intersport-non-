@@ -27,4 +27,14 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
         
         return super.toString() + " " + taille + " " + coloris;   
     }
+    
+    // Getters
+    
+    public String gettaille(){
+        return taille;
+    }
+    
+    public String getcoloris(){
+        return coloris;
+    }
 }

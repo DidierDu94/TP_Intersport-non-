@@ -37,6 +37,20 @@ public class Terrain extends Equipement{
         return super.toString() + " " + hauteur + " " +largeur + " " + poids;
     }
     
+    // Getters
+    
+    public float gethauteur(){
+        return hauteur;
+    }
+    
+    public float getlargeur(){
+        return largeur;
+    }
+    
+    public float getpoids(){
+        return poids;
+    }
+    
 }
     
 
