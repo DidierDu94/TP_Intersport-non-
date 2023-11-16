@@ -56,9 +56,9 @@ public class Equipement {       // Classe mère
     // Autres méthodes
     
     public boolean placeApres(Equipement autre){
-        
         String ref_autre = autre.getref();
-        return        
+        int comp = ref.compareTo(ref_autre);
+        return comp > 0;
     }
    
     

@@ -1,5 +1,4 @@
 package tp_decathlon;
-import java.util.Scanner;
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
 public class Magasin {
@@ -12,16 +11,24 @@ public class Magasin {
     private int nbCmd;                  // Nombre de commandes passées depuis le magasin
     private Commande[] lstCmd;          // Ensemble des commandés passées au magasin
     
+    private int cptTR;                  // Compteur spécifique pour la référence des équipements de Terrain
+    private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
+    private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
+    
     // Constructeur
     
-    public Magasin(String nom_mag, Equipement[] lstEqpmt, Commande[] lstCmd){
+    public Magasin(String nom_mag){
     
         this.nom_mag = nom_mag;
-        this.lstEqpmt = lstEqpmt;
-        this.nbEqpmt = lstEqpmt.length;
-        this.lstCmd = lstCmd;
-        this.nbCmd = lstCmd.length;
-          
+        
+        lstEqpmt = new Equipement[1000000];
+        nbEqpmt = 0;
+        lstCmd = new Commande[1000000];
+        nbCmd = 0;
+        
+        cptTR = 0;
+        cptJO = 0;
+        cptPR = 0;
     }
     
     // Méthode toString()
@@ -67,53 +74,54 @@ public class Magasin {
         return tabGrille;
     }
     
-    // Ajout d'un équipement  pour un terrain (2 cas) et protections des joueurs
-    
-    public Terrain ajout_Terr(){
-        
-        Scanner sc = new Scanner(System.in);
-        
-        System.out.println("Quel est le nom du sport ? ");
-        String sport = sc.nextLine();
-        System.out.println("Que voulez-vous acheter ? ");
-        //sc.nextLine();
-        String designation = sc.nextLine();
-        
-        System.out.println("Quel est son prix ? ");
-        float prix = sc.nextFloat();
-        System.out.println("Combien en voulez-vous ? ");
-        int nbExmpl = sc.nextInt();
-        System.out.println("Quel est son poids ? ");
-        float poids = sc.nextFloat();
-        
-        Terrain T;
-        
-        T = new Terrain("TR100",sport,designation,prix,nbExmpl,poids);
-        return T;       
+    public String reference(String type, int cpt){
+        String nbRef;
+        if (cpt<=9){
+            nbRef = "00" + cpt;
+        } else if (cpt<=99){
+            nbRef = "0" + cpt;
+        } else{
+            nbRef = "" + cpt;
+        }
+        String ref = type + nbRef;
+        return ref;
     }
     
-    public Terrain ajout_Terr_Size(String ref, String sport, String designation, float prix,int nbExmpl,float poids){
-        
-        Scanner scan = new Scanner( System.in);
-        
-        System.out.println("Quelle est la hauteur du terrain ?");
-        int haut = scan.nextInt();
-        System.out.println("Quelle est sa largeur ? ");
-        int larg = scan.nextInt();
-        
-        Terrain T_size;
-        T_size =  new Terrain("TR200",sport,designation,prix,nbExmpl,poids,haut,larg);
-        
-        return T_size;      
+    public void ajout(String sport, String nom, float prix, int nbExmpl, float poids){
+        String ref = reference("TR", cptTR);
+        Terrain TR;
+        TR = new Terrain(ref, sport, nom, prix, nbExmpl, poids);
+        lstEqpmt[cptTR+cptJO+cptPR] = TR;
+        cptTR += 1;
+        nbEqpmt += 1;
     }
     
-    public ProtectionJoueurs ajout_PJ(){
-        
-        
+    public void ajout(String sport, String nom, float prix, int nbExmpl, float hauteur, float largeur, float poids){
+        String ref = reference("TR", cptTR);
+        Terrain TR;
+        TR = new Terrain(ref, sport, nom, prix, nbExmpl, hauteur, largeur, poids);
+        lstEqpmt[cptTR+cptJO+cptPR] = TR;
+        cptTR += 1;
+        nbEqpmt += 1;
     }
     
+    public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris){
+        String ref = reference("JO", cptJO);
+        Joueurs JO;
+        JO = new Joueurs(ref , sport, nom, prix, nbExmpl, taille, coloris);
+        lstEqpmt[cptTR+cptJO+cptPR] = JO;
+        cptJO += 1;
+        nbEqpmt += 1;
+    }
     
-    
+    public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris, String niveau){
+        String ref = reference("PR", cptPR);
+        ProtectionJoueurs PR;
+        PR = new ProtectionJoueurs(ref , sport, nom, prix, nbExmpl, taille, coloris, niveau);
+        lstEqpmt[cptTR+cptJO+cptPR] = PR;
+        cptPR += 1;
+        nbEqpmt += 1;
+    }
     
     
     }
