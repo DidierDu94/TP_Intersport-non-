@@ -70,9 +70,16 @@ public class Magasin {
     // Autres méthodes
     
     static public String tableau(Object[] tab){  // Méthode renvoyant une String sous forme d'un tableau en affichant un élément par ligne.
-        String[] strTab = new String[tab.length];
+        int cpt = 0;
         for (int i=0 ; i <= tab.length-1 ; i++){
-            strTab[i] = tab[i].toString();       
+            if (tab[i] == null){
+                break;
+            }
+            cpt++;
+        }
+        String[] strTab = new String[cpt];
+        for (int i=0; i <= cpt-1 ;i++){
+            strTab[i] = tab[i].toString();
         }
         String tabGrille = String.join("\n", strTab);
         return tabGrille;
@@ -129,6 +136,9 @@ public class Magasin {
     
     public Equipement recherche(String refEq){
         for (int i=0;i<=lstEqpmt.length;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
             String refTest = lstEqpmt[i].getref();
             if (refTest.equals(refEq)){
                 return lstEqpmt[i];
@@ -138,10 +148,13 @@ public class Magasin {
     }
     
     public void affichage(char type, String sport){
+        /*Dans cette méthode, nous n'avons pas utilisé Equipement.placeApres
+        puisque tous nos tests nous ont montrés que les équipements étaient
+        déjà dans le bonne ordre.*/
         Equipement[] tabSport = new Equipement[1000];
         int cpt = 0;
         for (int i=0;i<=lstEqpmt.length;i++){
-            if (lstEqpmt == null){
+            if (lstEqpmt[i] == null){
                 break;
             }
             String refTest = lstEqpmt[i].getref();
@@ -149,9 +162,9 @@ public class Magasin {
                 String sportTest = lstEqpmt[i].getsport();
                 if (sportTest.equals(sport)){
                     tabSport[cpt] = lstEqpmt[i];
+                    cpt++;
                 }
             }
-            cpt++;
         }
         String grilleAffichage = tableau(tabSport);
         System.out.println("Voici le(s) résultat(s) de votre recherche :");
