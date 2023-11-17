@@ -15,8 +15,11 @@ public class TP_Decathlon {
         Joueurs j;
         j = new Joueurs("JO032", "Natation", "Bonnet", 10, 209, "XL", "bleu");
         //System.out.println(j);
+        ProtectionJoueurs p;
+        p = new ProtectionJoueurs("PR054", "Rugby", "Protège dents", 7.99f, 1808, "XXL", "noir", "avancé");
         
-        Equipement[] lignes = {t,j};
+        
+        Equipement[] lignes = {t,j,p};
         String tabLignes = Magasin.tableau(lignes);
         System.out.println(tabLignes);*/
         
@@ -27,8 +30,10 @@ public class TP_Decathlon {
         System.out.println(str.charAt(0));
         System.out.println(str.charAt(0)==sts.charAt(0));*/
         
-        String t[] = new String[3];
-        System.out.println(t[2]);
+        //String t[] = new String[3];
+        //System.out.println(t[2]);
+        
+        
         
     }
     

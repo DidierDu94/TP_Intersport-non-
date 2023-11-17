@@ -198,6 +198,7 @@ public class Magasin {
             
             LigneCommande ligne = new LigneCommande(nb, eq);
             tab[cpt] = ligne;
+            eq.setnbExmpl(eq.getnbExmpl()-nb);
             cpt++;
         }
         return tab;

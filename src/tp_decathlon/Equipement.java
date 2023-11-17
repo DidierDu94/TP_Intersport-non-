@@ -53,6 +53,12 @@ public class Equipement {       // Classe mère
         return nbExmpl;
     }
     
+    // Setter
+    
+    public void setnbExmpl(int setVal){
+        nbExmpl = setVal;
+    }
+    
     // Autres méthodes
     
     public boolean placeApres(Equipement autre){
