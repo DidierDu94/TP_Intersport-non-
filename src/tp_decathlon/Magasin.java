@@ -1,5 +1,9 @@
 package tp_decathlon;
+
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+
+import java.util.Scanner;
+
 
 public class Magasin {
     
@@ -21,9 +25,9 @@ public class Magasin {
     
         this.nom_mag = nom_mag;
         
-        lstEqpmt = new Equipement[1000000];
+        lstEqpmt = new Equipement[3000];
         nbEqpmt = 0;
-        lstCmd = new Commande[1000000];
+        lstCmd = new Commande[10000];
         nbCmd = 0;
         
         cptTR = 0;
@@ -123,7 +127,80 @@ public class Magasin {
         nbEqpmt += 1;
     }
     
-    
+    public Equipement recherche(String refEq){
+        for (int i=0;i<=lstEqpmt.length;i++){
+            String refTest = lstEqpmt[i].getref();
+            if (refTest.equals(refEq)){
+                return lstEqpmt[i];
+            }
+        }
+        return null;
     }
     
-
+    public void affichage(char type, String sport){
+        Equipement[] tabSport = new Equipement[1000];
+        int cpt = 0;
+        for (int i=0;i<=lstEqpmt.length;i++){
+            if (lstEqpmt == null){
+                break;
+            }
+            String refTest = lstEqpmt[i].getref();
+            if (refTest.charAt(0)==type){
+                String sportTest = lstEqpmt[i].getsport();
+                if (sportTest.equals(sport)){
+                    tabSport[cpt] = lstEqpmt[i];
+                }
+            }
+            cpt++;
+        }
+        String grilleAffichage = tableau(tabSport);
+        System.out.println("Voici le(s) résultat(s) de votre recherche :");
+        System.out.println(grilleAffichage);
+    }
+    
+    public LigneCommande[] choixEquip(){
+        Scanner sc = new Scanner(System.in);
+        LigneCommande[] tab = new LigneCommande[3000];
+        int cpt = 0;
+        
+        while (true){
+            String typeEq = "";
+            while (!typeEq.equals(" ") && !typeEq.equals("T") && !typeEq.equals("J") && !typeEq.equals("P")){
+                System.out.println("""
+                    Veuillez choisir le type d'équipement en tapant la lettre correspondante
+                    ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
+                    Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
+                typeEq = sc.nextLine();
+            }
+            if (typeEq.equals(" ")){
+                break;
+            }
+            System.out.println("Veuillez maintenant choisir le sport de votre choîx.");
+            String sp = sc.nextLine();
+            
+            affichage(typeEq.charAt(0),sp);
+            
+            System.out.println("Veuillez maintenant choisir l'équipement de votre choîx en recopiant sa référence.");
+            String ref = sc.nextLine();
+            
+            Equipement eq = recherche(ref);
+            if (eq == null){
+                continue;
+            }
+            
+            int nb = 0;
+            while (nb<=0){
+                System.out.println("Veuillez indiquer le nombre d'exmplaire de votre choîx.");
+                nb = sc.nextInt();
+            }
+            
+            sc.nextLine();
+            
+            LigneCommande ligne = new LigneCommande(nb, eq);
+            tab[cpt] = ligne;
+            cpt++;
+        }
+        return tab;
+    }
+    
+}

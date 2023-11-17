@@ -14,11 +14,11 @@ public class Commande{
     private LocalDate emission;         // Date d’émission de la commande
     private LocalDate livraison;        // Date de livraison prévue
     private float total;                // Coût total de la commande en euros
-    private Equipement[] lignes;        // Tableau contenant les différentes lignes de la commande
+    private LigneCommande[] lignes;     // Tableau contenant les différentes lignes de la commande
     
     // Constructeur
     
-    public Commande(String numero, String email, LocalDate livraison, Equipement[] lignes){
+    public Commande(String numero, String email, LocalDate livraison, LigneCommande[] lignes){
         
         this.numero = numero;
         this.email = email;
@@ -29,7 +29,7 @@ public class Commande{
         }
         float total = 0.0f;
         for (int i=0;i<=lignes.length-1;i++){
-            total += lignes[i].getprix();
+            total += lignes[i].getprixUni() * lignes[i].getnbExempl();
         }
         this.total = total;
         this.lignes = lignes;
@@ -66,7 +66,7 @@ public class Commande{
         return total;
     }
     
-    public Equipement[] getlignes(){
+    public LigneCommande[] getlignes(){
         return lignes;
     }
     

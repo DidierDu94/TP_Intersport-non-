@@ -20,11 +20,15 @@ public class TP_Decathlon {
         String tabLignes = Magasin.tableau(lignes);
         System.out.println(tabLignes);*/
         
-        String str = "TR111";
-        String sts = "JO124";
+        /*String str = "TR111";
+        String sts = "TR124";
         //int test = str;
-        System.out.println(str.compareTo(sts));
+        //System.out.println(str.compareTo(sts));
+        System.out.println(str.charAt(0));
+        System.out.println(str.charAt(0)==sts.charAt(0));*/
         
+        String t[] = new String[3];
+        System.out.println(t[2]);
         
     }
     
