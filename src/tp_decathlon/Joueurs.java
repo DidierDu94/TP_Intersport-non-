@@ -37,4 +37,12 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
     public String getcoloris(){
         return coloris;
     }
+    
+    // Autres méthodes
+    
+    @Override
+    public String versFichier(){
+        return super.versFichier() + " : " + taille + " : " + coloris;
+    }
+    
 }

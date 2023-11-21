@@ -2,12 +2,15 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
+import java.io.IOException;
+
+
 public class TP_Decathlon {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         /*Terrain t;
         t = new Terrain("TR128", "Escalade", "Corde", 114.99f, 78, 70, 0.01f, 0.400f);
@@ -42,7 +45,9 @@ public class TP_Decathlon {
         M.ajout("Rugby", "Maillot", 4, 2893, "XXS", "bleu");
         M.ajout("Natation", "Chariot enrouleur", 1751.22f, 23,1.6f, 3, 85);
         
-        System.out.println(M.tableau(M.choixEquip()));
+        //System.out.println(M.tableau(M.choixEquip()));
+        
+        M.versFichierEquipements();
     }
     
     

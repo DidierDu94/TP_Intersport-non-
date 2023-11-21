@@ -31,4 +31,11 @@ public class ProtectionJoueurs extends Joueurs{
         return niveau;
     }
     
+    // Autres méthodes
+    
+    @Override
+    public String versFichier(){
+        return super.versFichier() + " : " + niveau; 
+    }
+    
 }

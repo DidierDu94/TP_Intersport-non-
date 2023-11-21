@@ -66,6 +66,9 @@ public class Equipement {       // Classe mère
         int comp = ref.compareTo(ref_autre);
         return comp > 0;
     }
-   
+    
+    public String versFichier(){
+        return ref + System.lineSeparator() + sport + " : " + nom + " : " + prix + " : " + nbExmpl;
+    }
     
 }

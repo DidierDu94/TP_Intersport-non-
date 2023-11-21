@@ -51,6 +51,12 @@ public class Terrain extends Equipement{
         return poids;
     }
     
+    // Autres méthodes
+    
+    @Override
+    public String versFichier(){
+        return super.versFichier() + " : " + hauteur + " : " + largeur + " : " + poids;
+    }
 }
     
 

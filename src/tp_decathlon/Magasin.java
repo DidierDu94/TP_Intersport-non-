@@ -2,6 +2,8 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -18,6 +20,8 @@ public class Magasin {
     private int cptTR;                  // Compteur spécifique pour la référence des équipements de Terrain
     private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
     private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
+    
+    private static final String fichiEr = "fichiEr.txt";
     
     // Constructeur
     
@@ -215,6 +219,18 @@ public class Magasin {
             cpt++;
         }
         return tab;
+    }
+    
+    public void versFichierEquipements() throws IOException{
+        FileWriter fich = new FileWriter(fichiEr);          // ovrir le fichier en écriture
+        for (int i=0;i<lstEqpmt.length;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
+            String chaine  = lstEqpmt[i].versFichier();
+            fich.write(chaine);                                 // écire dans le fichier
+        }
+        fich.close();                                              // fermer le fichier
     }
     
 }

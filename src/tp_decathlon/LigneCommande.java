@@ -42,5 +42,9 @@ public class LigneCommande {
         return prixUni;
     }
     
+    // Autres méthodes
     
+    public String versFichier(){
+        return ref + " : " + nbExempl + " : " + prixUni;
+    }
 }

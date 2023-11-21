@@ -70,4 +70,10 @@ public class Commande{
         return lignes;
     }
     
+    // Autres méthodes
+    
+    public String versFichier(){
+        return numero + System.lineSeparator() + " : " + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
+    }
+    
 }

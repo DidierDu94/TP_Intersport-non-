@@ -1,0 +1,8 @@
+TR000
+Escalade : Corde : 114.99 : 78 : 70.0 : 0.01 : 0.4JO000
+Natation : Bonnet : 10.0 : 209 : XL : bleuPR000
+Rugby : Protège dents : 7.99 : 1808 : XXL : noir : nullJO001
+Escalade : Chaussons : 58.99 : 14 : XS : orangeTR001
+Natation : Ligne d'eau : 395.0 : 50 : 25.0 : 0.1 : 60.0JO002
+Rugby : Maillot : 4.0 : 2893 : XXS : bleuTR002
+Natation : Chariot enrouleur : 1751.22 : 23 : 1.6 : 3.0 : 85.0
