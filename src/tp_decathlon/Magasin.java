@@ -2,6 +2,9 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -231,6 +234,31 @@ public class Magasin {
             fich.write(chaine);                                 // écire dans le fichier
         }
         fich.close();                                              // fermer le fichier
+    }
+    
+    public void depuisFichierEquipements() throws FileNotFoundException, IOException{
+        FileReader fich = new FileReader(fichiEr);          // ouvrir le fichier en lecture
+        BufferedReader br = new BufferedReader(fich);
+        String reference = br.readLine();                          // lire une ligne du fichier
+        while(reference != null){
+            String ligne = br.readLine();
+            String[] tab = ligne.split(" : ");
+            String sport = tab[0];
+            String nom = tab[1];
+            float prix = Float.valueOf(tab[2]);
+            int nbExpl = Integer.valueOf(tab[3]);
+            if(reference.startsWith("JO")){
+                // créer instance Joueurs
+                // l'ajouter dans le tableau
+            }else if(reference.startsWith("PR")){
+                // créer instance ProtectionJoueurs
+                // l'ajouter dans le tableau
+            }else{
+                // créer instance Terrain
+                // l'ajouter dans le tableau
+            }
+        }
+        fich.close();
     }
     
 }
