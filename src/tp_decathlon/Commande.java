@@ -73,7 +73,7 @@ public class Commande{
     // Autres méthodes
     
     public String versFichier(){
-        return numero + System.lineSeparator() + " : " + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
+        return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
     }
     
 }

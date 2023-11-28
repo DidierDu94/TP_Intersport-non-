@@ -25,6 +25,7 @@ public class Magasin {
     private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
     
     private static final String fichiEr = "fichiEr.txt";
+    private static final String fiChier = "fiChier.txt";
     
     // Constructeur
     
@@ -107,6 +108,17 @@ public class Magasin {
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, float poids){
         String ref = reference("TR", cptTR);
+        String test;
+        for (int i=0;i<=lstEqpmt.length-1;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
+            test = lstEqpmt[i].getref();
+            if (ref.equals(test)){
+                cptTR++;
+                ref = reference("TR", cptTR);
+            }
+        }
         Terrain TR;
         TR = new Terrain(ref, sport, nom, prix, nbExmpl, poids);
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
@@ -116,6 +128,17 @@ public class Magasin {
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, float hauteur, float largeur, float poids){
         String ref = reference("TR", cptTR);
+        String test;
+        for (int i=0;i<=lstEqpmt.length-1;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
+            test = lstEqpmt[i].getref();
+            if (ref.equals(test)){
+                cptTR++;
+                ref = reference("TR", cptTR);
+            }
+        }
         Terrain TR;
         TR = new Terrain(ref, sport, nom, prix, nbExmpl, hauteur, largeur, poids);
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
@@ -125,6 +148,17 @@ public class Magasin {
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris){
         String ref = reference("JO", cptJO);
+        String test;
+        for (int i=0;i<=lstEqpmt.length-1;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
+            test = lstEqpmt[i].getref();
+            if (ref.equals(test)){
+                cptJO++;
+                ref = reference("JO", cptJO);
+            }
+        }
         Joueurs JO;
         JO = new Joueurs(ref , sport, nom, prix, nbExmpl, taille, coloris);
         lstEqpmt[cptTR+cptJO+cptPR] = JO;
@@ -134,6 +168,17 @@ public class Magasin {
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris, String niveau){
         String ref = reference("PR", cptPR);
+        String test;
+        for (int i=0;i<=lstEqpmt.length-1;i++){
+            if (lstEqpmt[i] == null){
+                break;
+            }
+            test = lstEqpmt[i].getref();
+            if (ref.equals(test)){
+                cptPR++;
+                ref = reference("PR", cptPR);
+            }
+        }
         ProtectionJoueurs PR;
         PR = new ProtectionJoueurs(ref , sport, nom, prix, nbExmpl, taille, coloris, niveau);
         lstEqpmt[cptTR+cptJO+cptPR] = PR;
@@ -230,8 +275,8 @@ public class Magasin {
             if (lstEqpmt[i] == null){
                 break;
             }
-            String chaine  = lstEqpmt[i].versFichier();
-            fich.write(chaine);                                 // écire dans le fichier
+            String chaine = lstEqpmt[i].versFichier();
+            fich.write(chaine + System.lineSeparator());           // écire dans le fichier
         }
         fich.close();                                              // fermer le fichier
     }
@@ -248,17 +293,46 @@ public class Magasin {
             float prix = Float.valueOf(tab[2]);
             int nbExpl = Integer.valueOf(tab[3]);
             if(reference.startsWith("JO")){
-                // créer instance Joueurs
-                // l'ajouter dans le tableau
+                String taille = tab[4];
+                String coloris = tab[5];
+                Joueurs j = new Joueurs(reference, sport, nom, prix, nbExpl, taille, coloris);
+                lstEqpmt[nbEqpmt] = j;
+                nbEqpmt += 1;
             }else if(reference.startsWith("PR")){
-                // créer instance ProtectionJoueurs
-                // l'ajouter dans le tableau
+                String taille = tab[4];
+                String coloris = tab[5];
+                String niveau = tab[6];
+                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport, nom, prix, nbExpl, taille, coloris, niveau);
+                lstEqpmt[nbEqpmt] = p;
+                nbEqpmt += 1;
             }else{
-                // créer instance Terrain
-                // l'ajouter dans le tableau
+                float hauteur = Float.valueOf(tab[4]);
+                float largeur = Float.valueOf(tab[5]);
+                float poids = Float.valueOf(tab[6]);
+                Terrain t = new Terrain(reference, sport, nom, prix, nbExpl, hauteur, largeur, poids);
+                lstEqpmt[nbEqpmt] = t;
+                nbEqpmt += 1;
             }
+            reference = br.readLine();
         }
         fich.close();
+    }
+    
+    public void versFichierCommandes() throws IOException{
+        FileWriter fich = new FileWriter(fiChier);          // ovrir le fichier en écriture
+        for (int i=0;i<lstCmd.length;i++){
+            if (lstCmd[i] == null){
+                break;
+            }
+            String lignCom = lstCmd[i].versFichier();
+            LigneCommande[] tabLignes = lstCmd[i].getlignes();
+            String chaine = "";
+            for (int j=0;j<tabLignes.length;j++){
+                chaine += tabLignes[j].versFichier() + System.lineSeparator();
+            }
+            fich.write(lignCom + System.lineSeparator() + chaine); // écire dans le fichier
+        }
+        fich.close();                                              // fermer le fichier
     }
     
 }
