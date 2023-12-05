@@ -1,6 +1,7 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 public class Terrain extends Equipement{
     
@@ -51,7 +52,7 @@ public class Terrain extends Equipement{
         return poids;
     }
     
-    // Autres méthodes
+    // Méthode retournant les informations à écrire dans le fichier en String
     
     @Override
     public String versFichier(){

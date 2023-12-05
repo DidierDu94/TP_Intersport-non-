@@ -319,7 +319,7 @@ public class Magasin {
     }
     
     public void versFichierCommandes() throws IOException{
-        FileWriter fich = new FileWriter(fiChier);          // ovrir le fichier en écriture
+        FileWriter fich = new FileWriter(fiChier);  // ouvrir le fichier en écriture
         for (int i=0;i<lstCmd.length;i++){
             if (lstCmd[i] == null){
                 break;
@@ -333,6 +333,29 @@ public class Magasin {
             fich.write(lignCom + System.lineSeparator() + chaine); // écire dans le fichier
         }
         fich.close();                                              // fermer le fichier
+    }
+    
+    public void Replacement(){
+        
+        boolean k = true;
+        
+        for (int i=0;i<lstEqpmt.length-1;i++){
+            if (k == false){
+                break;
+            }
+            for (int j=0; j<=lstEqpmt.length-1;j++){ 
+                if (lstEqpmt[j+1] == null){
+                    k = false;
+                    break;
+                }
+                if (lstEqpmt[j].placeApres(lstEqpmt[j+1])){
+
+                    Equipement t = lstEqpmt[j];
+                    lstEqpmt[j] = lstEqpmt[j+1];
+                    lstEqpmt[j+1] = t;       
+                }
+            }
+        }
     }
     
 }

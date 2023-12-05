@@ -1,20 +1,22 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
-public class Equipement {       // Classe mère
+public class Equipement {        // Classe mère
     
     // Attributs
     
-    private String ref;                 // Référence de l'équipement : 5 caractères
+    private String ref;        // Référence de l'équipement : 5 caractères
     private String sport;
-    private String nom;                 // Désignation
-    private float prix;                 // Prix unitaire de l'équipement en euros
-    private int nbExmpl;                // Nombre d'exemplaire de l'équipement en stock
+    private String nom;       // Désignation
+    private float prix;      // Prix unitaire de l'équipement en euros
+    private int nbExmpl;    // Nombre d'exemplaire de l'équipement en stock
     
     // Constructeur
     
-    public Equipement(String ref, String sport, String nom, float prix, int nbExmpl){
+    public Equipement(String ref, String sport, String nom, float prix,
+            int nbExmpl){
         
         this.ref = ref;
         this.sport = sport;
@@ -59,7 +61,7 @@ public class Equipement {       // Classe mère
         nbExmpl = setVal;
     }
     
-    // Autres méthodes
+    // Méthode permettant d'ajouter un nouvel équipement à la fin du tableau
     
     public boolean placeApres(Equipement autre){
         String ref_autre = autre.getref();
@@ -67,8 +69,11 @@ public class Equipement {       // Classe mère
         return comp > 0;
     }
     
+    // Méthode retournant les informations à écrire dans le fichier en String
+    
     public String versFichier(){
-        return ref + System.lineSeparator() + sport + " : " + nom + " : " + prix + " : " + nbExmpl;
+        return ref + System.lineSeparator() + sport + " : " + nom + " : " 
+                + prix + " : " + nbExmpl;
     }
     
 }

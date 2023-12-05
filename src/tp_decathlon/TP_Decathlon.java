@@ -1,15 +1,14 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 import java.io.IOException;
 
+// Main class
 
 public class TP_Decathlon {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         /*Terrain t;
@@ -45,10 +44,18 @@ public class TP_Decathlon {
         M.ajout("Rugby", "Maillot", 4, 2893, "XXS", "bleu");
         M.ajout("Natation", "Chariot enrouleur", 1751.22f, 23,1.6f, 3, 85);
         
+        M.Replacement();
+        
+                    
+       
+                    // créer une vairable pour break;
+                    
         //System.out.println(M.tableau(M.choixEquip()));
         
         M.versFichierEquipements();
+        
     }
+    
     
     
 }

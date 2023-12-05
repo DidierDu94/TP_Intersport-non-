@@ -1,6 +1,7 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 public class Joueurs extends Equipement{        // Super classe de ProtectionJoueurs
     
@@ -38,7 +39,7 @@ public class Joueurs extends Equipement{        // Super classe de ProtectionJou
         return coloris;
     }
     
-    // Autres méthodes
+    // Méthode retournant les informations à écrire dans le fichier en String
     
     @Override
     public String versFichier(){
