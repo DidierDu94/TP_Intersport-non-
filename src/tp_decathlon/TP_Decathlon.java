@@ -34,7 +34,7 @@ public class TP_Decathlon {
         
         //String t[] = new String[3];
         //System.out.println(t[2]);
-        
+        /*
         Magasin M = new Magasin("Sport2000");
         M.ajout("Escalade", "Corde", 114.99f, 78, 70, 0.01f, 0.400f);
         M.ajout("Natation", "Bonnet", 10, 209, "XL", "bleu");
@@ -51,11 +51,11 @@ public class TP_Decathlon {
                     // créer une vairable pour break;
                     
         System.out.println(M.tableau(M.choixEquip()));
-        
+        */
         //M.versFichierEquipements();
         
+        
+        
     }
-    
-    
     
 }

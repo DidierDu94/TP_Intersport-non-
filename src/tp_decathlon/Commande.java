@@ -76,4 +76,10 @@ public class Commande{
         return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
     }
     
+    public boolean placeApres(Commande autre){
+        int ref_autre = Integer.valueOf(autre.getnumero());
+        int intRef = Integer.valueOf(numero);
+        return intRef > ref_autre;
+    }
+    
 }

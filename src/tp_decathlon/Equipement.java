@@ -2,9 +2,6 @@ package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
 
-import java.time.LocalDate;
-import java.util.Scanner;
-
 // TDTP3: Vente d'équipements sportifs
 
 public class Equipement {        // Classe mère
@@ -59,35 +56,28 @@ public class Equipement {        // Classe mère
         return nbExmpl;
     }
     
-    public void majDispo(int qte){
-        
-        Scanner sc = new Scanner(System.in);
-        String c;
-        System.out.println("Voulez-vous rajouter/retirer cette quantité à votre liste d'équipement  a/r");
-        c = sc.nextLine();
-        
-        while (!c.equals(null)){
-        
-            if (!c.equals("a") || !c.equals("r")){
-                break;
-            }
-        
-            else if (c.equals("a")){
-                nbExmpl += qte;
-            }
-            
-            else{
-                nbExmpl -= qte;    
-            }
-        }    
-    }
-    
-    
-    
     // Setter
     
     public void setnbExmpl(int setVal){
         nbExmpl = setVal;
+    }
+    
+    // Autres
+    
+    public void majDispo(int qte){
+        nbExmpl += qte;
+    }
+    
+    public boolean verifDispo(int qte){
+        return nbExmpl >= qte;
+    }
+    
+    public long calculDelai(int qte){
+        long delai = 3L;
+        if(!verifDispo(qte)){
+            delai += 30L;
+        }
+        return delai;
     }
     
     // Méthode permettant d'ajouter un nouvel équipement à la fin du tableau

@@ -58,6 +58,20 @@ public class Terrain extends Equipement{
     public String versFichier(){
         return super.versFichier() + " : " + hauteur + " : " + largeur + " : " + poids;
     }
+    
+    // Autre
+    
+    @Override
+    public long calculDelai(int qte){
+        long delai = 3L;
+        if(!verifDispo(qte)){
+            delai += 30L;
+        }
+        if (poids > 100){
+            delai += 2L;
+        }
+        return delai;
+    }
 }
     
 

@@ -264,32 +264,13 @@ public class Magasin {
             
             LigneCommande ligne = new LigneCommande(nb, eq);
             tab[cpt] = ligne;
-            eq.setnbExmpl(eq.getnbExmpl()-nb);
             cpt++;
         }
         return tab;
     }
     
-    public boolean verifDispo(int qte){
-        
-        int nbxmpl = nbEqpmt.getnbEqpmt();
-        
-        if((nbxmpl)-(qte)<0){
-            return false;   
-        }
-        else{
-           return true; 
-        }   
-    }
-    
-    public int calculDelai(int qte){
-            
-           
-     
-    }
-    
     public void versFichierEquipements() throws IOException{
-        FileWriter fich = new FileWriter(fichiEr);          // ovrir le fichier en écriture
+        FileWriter fich = new FileWriter(fichiEr);          // ouvrir le fichier en écriture
         for (int i=0;i<lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
                 break;
@@ -383,6 +364,7 @@ public class Magasin {
             nbCmd++;
             numero = br.readLine();
         }
+        fich.close();
     }
     
     public LocalDate dateEcrite(String date){
@@ -412,6 +394,87 @@ public class Magasin {
                     lstEqpmt[j] = lstEqpmt[j+1];
                     lstEqpmt[j+1] = t;       
                 }
+            }
+        }
+    }
+    
+    public void ajout(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Veuillez nous indiquer votre adresse courriel :");
+        String email = sc.nextLine();
+        System.out.println("Vous allez maintenant choisir les équipements que vous voulez acheter.");
+        LigneCommande[] materiel = choixEquip();
+        float total = 0f;
+        long delai = 0L;
+        for(int i=0;i<materiel.length;i++){
+            if(materiel[i]==null){
+                break;
+            }
+            total += materiel[i].getprixUni();
+            int nb = materiel[i].getnbExempl();
+            long del = recherche(materiel[i].getref()).calculDelai(nb);
+            if(del>delai){
+                delai = del;
+            }
+            recherche(materiel[i].getref()).majDispo(nb*(-1));
+        }
+        LocalDate emission = LocalDate.now();
+        LocalDate livraison = emission.plusDays(delai);
+        String test;
+        String cpt = reference(nbCmd);
+        String num = "";
+        for(int i=0;i<lstCmd.length;i++){
+            num = "" + emission.getYear() + cpt;
+            if (lstCmd[i] == null){
+                break;
+            }
+            test = lstCmd[i].getnumero();
+            if (num.equals(test)){
+                nbCmd++;
+                cpt = reference(nbCmd);
+            }
+        }
+        Commande com = new Commande(num, email, emission, livraison, materiel);
+        nbCmd++;
+    }
+    
+    public String reference(int cp){
+        String cpt;
+        if(nbCmd<10){
+                cpt = "000" + nbCmd;
+            }else if(nbCmd<100){
+                cpt = "00" + nbCmd;
+            }else if(nbCmd<1000){
+                cpt = "0" + nbCmd;
+            }else{
+                cpt = "" + nbCmd;
+            }
+        return cpt;
+    }
+    
+    public void affichage(String courriel){
+        System.out.println("Voici les commandes effectuées par "+courriel+" .");
+        for(int i=0;i<lstCmd.length;i++){
+            if(lstCmd[i]==null){
+                break;
+            }
+            String adresse = lstCmd[i].getemail();
+            if(courriel.equals(adresse)){
+                System.out.println(lstCmd[i]);
+            }
+        }
+    }
+    
+    public void affichage(LocalDate date){
+        System.out.println("Voici les commandes devant être livrées après : "
+                + date);
+        for(int i=0;i<lstCmd.length;i++){
+            if(lstCmd[i]==null){
+                break;
+            }
+            LocalDate test = lstCmd[i].getlivraison();
+            if(test.isAfter(date)){
+                System.out.println(lstCmd[i]);
             }
         }
     }
