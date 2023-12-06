@@ -1,6 +1,7 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -25,8 +26,8 @@ public class Magasin {
     private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
     private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
     
-    private static final String fichiEr = "fichiEr.txt";
-    private static final String fiChier = "fiChier.txt";
+    private static final String fichiEr = "fichiEr.txt";// Fichier d'équipements
+    private static final String fiChier = "fiChier.txt"; // Fichier de Commandes
     
     // Constructeur
     
@@ -34,9 +35,9 @@ public class Magasin {
     
         this.nom_mag = nom_mag;
         
-        lstEqpmt = new Equipement[3000];
+        lstEqpmt = new Equipement[3000]; // On crée une liste d'équipement en contenant 3000 différents au maximum.
         nbEqpmt = 0;
-        lstCmd = new Commande[10000];
+        lstCmd = new Commande[10000];   // On crée une liste de commandes passées au magasin de 10 000 au maximum.
         nbCmd = 0;
         
         cptTR = 0;
@@ -50,7 +51,9 @@ public class Magasin {
     public String toString(){
         String tabEqpmt = tableau(lstEqpmt);
         String tabCmd = tableau(lstCmd);
-        return nom_mag + "\n" + "Liste des équipements vendus :" + "\n" + tabEqpmt + "\n"
+        
+        return nom_mag + "\n" + "Liste des équipements vendus :" + "\n" 
+                       + tabEqpmt + "\n"
                 + "Liste des commandes passées au magasin :" + "\n" + tabCmd ;
     }
     
@@ -78,21 +81,30 @@ public class Magasin {
     
     // Autres méthodes
     
-    static public String tableau(Object[] tab){  // Méthode renvoyant une String sous forme d'un tableau en affichant un élément par ligne.
+    static public String tableau(Object[] tab){  // Méthode renvoyant une String sous forme d'un tableau en affichant un équipement par ligne.
+        
         int cpt = 0;
-        for (int i=0 ; i <= tab.length-1 ; i++){
+        for (int i=0 ; i <= tab.length-1 ; i++){ // On vérifie si la ligne du tableau est vide.
             if (tab[i] == null){
                 break;
             }
             cpt++;
         }
-        String[] strTab = new String[cpt];
+        
+        String[] strTab = new String[cpt]; // On crée notre String sous forme de tableau
         for (int i=0; i <= cpt-1 ;i++){
-            strTab[i] = tab[i].toString();
+            strTab[i] = tab[i].toString(); // On rentre les informations des équipements proposés et des listes de commandes passées au magasin. 
         }
+        
         String tabGrille = String.join("\n", strTab);
         return tabGrille;
     }
+    
+    /*
+    Méthode permettant d'avoir la référence d'un équipement. 
+    Celui-ci est composé de 2 lettres pour le nom et de 3 chiffres 
+    pour son numéro. C'est une String
+    */
     
     public String reference(String type, int cpt){
         String nbRef;
@@ -107,6 +119,11 @@ public class Magasin {
         return ref;
     }
     
+    /* Méthodes ajout
+       Ces méthodes permettent d'ajouter à notre liste d'équipements un nouvel 
+        équipement du type de notre choix.
+    */
+    
     public void ajout(String sport, String nom, float prix, int nbExmpl, float poids){
         String ref = reference("TR", cptTR);
         String test;
@@ -120,6 +137,7 @@ public class Magasin {
                 ref = reference("TR", cptTR);
             }
         }
+        
         Terrain TR;
         TR = new Terrain(ref, sport, nom, prix, nbExmpl, poids);
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
@@ -180,12 +198,18 @@ public class Magasin {
                 ref = reference("PR", cptPR);
             }
         }
+        
         ProtectionJoueurs PR;
         PR = new ProtectionJoueurs(ref , sport, nom, prix, nbExmpl, taille, coloris, niveau);
         lstEqpmt[cptTR+cptJO+cptPR] = PR;
         cptPR += 1;
         nbEqpmt += 1;
     }
+    
+    /* 
+    Méthode permettant de rechercher un équipement dans la liste grâce 
+    à sa référence.
+    */
     
     public Equipement recherche(String refEq){
         for (int i=0;i<=lstEqpmt.length;i++){
@@ -200,6 +224,8 @@ public class Magasin {
         return null;
     }
     
+    //Méthode permettant l'affichage de notre liste d'équipements
+    
     public void affichage(char type, String sport){
         /*Dans cette méthode, nous n'avons pas utilisé Equipement.placeApres
         puisque tous nos tests nous ont montrés que les équipements étaient
@@ -207,7 +233,7 @@ public class Magasin {
         Equipement[] tabSport = new Equipement[1000];
         int cpt = 0;
         for (int i=0;i<=lstEqpmt.length;i++){
-            if (lstEqpmt[i] == null){
+            if (lstEqpmt[i] == null){   // On vérifie si la ligne est nulle.
                 break;
             }
             String refTest = lstEqpmt[i].getref();
@@ -219,10 +245,17 @@ public class Magasin {
                 }
             }
         }
+        
         String grilleAffichage = tableau(tabSport);
         System.out.println("Voici le(s) résultat(s) de votre recherche :");
         System.out.println(grilleAffichage);
     }
+    
+    /*
+      Méthode permettant de demander au client s'il veut passer la commande.
+      On lui demande ensuite quel type de commande il veut passer (type de sport
+      et sa quantité).
+    */
     
     public LigneCommande[] choixEquip(){
         Scanner sc = new Scanner(System.in);
@@ -231,22 +264,25 @@ public class Magasin {
         
         while (true){
             String typeEq = "";
-            while (!typeEq.equals(" ") && !typeEq.equals("T") && !typeEq.equals("J") && !typeEq.equals("P")){
+            while (!typeEq.equals(" ") && !typeEq.equals("T") 
+                   && !typeEq.equals("J") && !typeEq.equals("P")){
                 System.out.println("""
-                    Veuillez choisir le type d'équipement en tapant la lettre correspondante
-                    ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
-                    Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
+        Veuillez choisir le type d'équipement en tapant la lettre correspondante
+          ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
+ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
                 typeEq = sc.nextLine();
             }
             if (typeEq.equals(" ")){
                 break;
             }
-            System.out.println("Veuillez maintenant choisir le sport de votre choîx.");
+            System.out.println("Veuillez maintenant choisir le sport"
+                             + " de votre choîx.");
             String sp = sc.nextLine();
             
             affichage(typeEq.charAt(0),sp);
             
-            System.out.println("Veuillez maintenant choisir l'équipement de votre choîx en recopiant sa référence.");
+            System.out.println("Veuillez maintenant choisir l'équipement"
+                           + " de votre choîx en recopiant sa référence.");
             String ref = sc.nextLine();
             
             Equipement eq = recherche(ref);
@@ -270,41 +306,33 @@ public class Magasin {
         return tab;
     }
     
-    public boolean verifDispo(int qte){
-        
-        int nbxmpl = nbEqpmt.getnbEqpmt();
-        
-        if((nbxmpl)-(qte)<0){
-            return false;   
-        }
-        else{
-           return true; 
-        }   
-    }
-    
-    public int calculDelai(int qte){
-            
-           
-     
-    }
-    
+    /* 
+     Méthode permettant la sauvegarde sous la forme d'un fichier texte
+     des informations contenues dans notre tableau des équipements.
+    */
     public void versFichierEquipements() throws IOException{
-        FileWriter fich = new FileWriter(fichiEr);          // ovrir le fichier en écriture
+        FileWriter fich = new FileWriter(fichiEr);   // On ouvre le fichier en écriture
         for (int i=0;i<lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
                 break;
             }
             String chaine = lstEqpmt[i].versFichier();
-            fich.write(chaine + System.lineSeparator());           // écrire dans le fichier
+            fich.write(chaine + System.lineSeparator());  // On écrit dans le fichier
         }
         
-        fich.close();                                              // fermer le fichier
+        fich.close();                                      //  On ferme le fichier
     }
     
-    public void depuisFichierEquipements() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(fichiEr);          // ouvrir le fichier en lecture
+    /*
+      Méthode permettant de charger l'ensemble des équipements
+      à  partir de son fichier texte.
+    */
+    
+    public void depuisFichierEquipements() throws FileNotFoundException
+                                                  , IOException{
+        FileReader fich = new FileReader(fichiEr);     // On ouvre le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
-        String reference = br.readLine();                          // lire une ligne du fichier
+        String reference = br.readLine();                          // On lit une ligne du fichier
         while(reference != null){
             String ligne = br.readLine();
             String[] tab = ligne.split(" : ");
@@ -315,14 +343,16 @@ public class Magasin {
             if(reference.startsWith("JO")){
                 String taille = tab[4];
                 String coloris = tab[5];
-                Joueurs j = new Joueurs(reference, sport, nom, prix, nbExpl, taille, coloris);
+                Joueurs j = new Joueurs(reference, sport, nom, prix
+                                       , nbExpl, taille, coloris);
                 lstEqpmt[nbEqpmt] = j;
                 nbEqpmt += 1;
             }else if(reference.startsWith("PR")){
                 String taille = tab[4];
                 String coloris = tab[5];
                 String niveau = tab[6];
-                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport, nom, prix, nbExpl, taille, coloris, niveau);
+                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport
+                            , nom, prix, nbExpl, taille, coloris, niveau);
                 lstEqpmt[nbEqpmt] = p;
                 nbEqpmt += 1;
             }else{
@@ -333,13 +363,17 @@ public class Magasin {
                 lstEqpmt[nbEqpmt] = t;
                 nbEqpmt += 1;
             }
-            reference = br.readLine();
+            reference = br.readLine();  // On lit la ligne
         }
-        fich.close();
+        fich.close();  // On ferme le fichier
     }
     
+    /* 
+     Méthode permettant la sauvegarde sous la forme d'un fichier texte
+     des informations contenues dans notre tableau de commandes.
+    */
     public void versFichierCommandes() throws IOException{
-        FileWriter fich = new FileWriter(fiChier);  // ouvrir le fichier en écriture
+        FileWriter fich = new FileWriter(fiChier);  // On ouvre le fichier en écriture
         for (int i=0;i<lstCmd.length;i++){
             if (lstCmd[i] == null){
                 break;
@@ -350,15 +384,20 @@ public class Magasin {
             for (int j=0;j<tabLignes.length;j++){
                 chaine += tabLignes[j].versFichier() + System.lineSeparator();
             }
-            fich.write(lignCom + System.lineSeparator() + chaine); // écire dans le fichier
+            fich.write(lignCom + System.lineSeparator() + chaine); // On écrit dans le fichier
         }
-        fich.close();                                              // fermer le fichier
+        
+        fich.close();                                       // On ferme le fichier
     }
     
+    /*
+      Méthode permettant de charger l'ensemble de commandes
+      à  partir de son fichier texte.
+    */
     public void depuisFichierCommandes() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(fiChier);          // ouvrir le fichier en lecture
+        FileReader fich = new FileReader(fiChier);      // On ouvre le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
-        String numero = br.readLine();                          // lire une ligne du fichier
+        String numero = br.readLine();                     // On lit une ligne du fichier
         while(numero != null){
             String donnees = br.readLine();
             String[] info = donnees.split(" : ");
@@ -369,7 +408,7 @@ public class Magasin {
             String nombreLignes = br.readLine();
             int nbL = Integer.valueOf(nombreLignes);
             LigneCommande[] lignes = new LigneCommande[nbL];
-            for (int i=0;i<nbL;i++){
+            for (int i=0;i<nbL;i++){             
                 String ligne = br.readLine();
                 String[] bon = ligne.split(" : ");
                 String ref = bon[0];
@@ -383,7 +422,11 @@ public class Magasin {
             nbCmd++;
             numero = br.readLine();
         }
+        
+        fich.close();
     }
+    
+    // Méthode permettant d'afficher la date (année-mois-jour)de la date de livraison.
     
     public LocalDate dateEcrite(String date){
         String[] tab = date.split("-");
@@ -392,6 +435,8 @@ public class Magasin {
         int jour = Integer.valueOf(tab[2]);
         return LocalDate.of(annee, mois, jour);
     }
+    
+    // Méthode permettant de 
     
     public void replacement(){
         

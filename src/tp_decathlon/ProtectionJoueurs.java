@@ -31,7 +31,10 @@ public class ProtectionJoueurs extends Joueurs{
         return niveau;
     }
     
-    // Méthode retournant les informations à écrire dans le fichier en String
+    /*
+    Méthode retournant sous la forme d'une chaine de caractères les 
+    informations à écrire dans le fichier texte.
+    */
     
     @Override
     public String versFichier(){

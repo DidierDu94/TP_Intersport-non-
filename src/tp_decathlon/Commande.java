@@ -1,9 +1,9 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 import java.time.LocalDate;
-
 
 public class Commande{
     
@@ -41,7 +41,8 @@ public class Commande{
     @Override
     public String toString(){
         String tabLignes = Magasin.tableau(lignes);
-        return numero + " " + email + " " + emission + " " + livraison + " " + total + "\n" + tabLignes;
+        return numero + " " + email + " " + emission + " " + livraison 
+               + " " + total + "\n" + tabLignes;
     }
     
     // Getters
@@ -70,10 +71,13 @@ public class Commande{
         return lignes;
     }
     
-    // Autres méthodes
+    /*
+    Méthode retournant sous la forme d'une chaine de caractères les 
+    informations à écrire dans le fichier texte.
+    */
     
-    public String versFichier(){
-        return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
-    }
-    
+    public String versFichier(){ 
+        return numero + System.lineSeparator() + email + " : " + emission 
+   + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
+    }  
 }

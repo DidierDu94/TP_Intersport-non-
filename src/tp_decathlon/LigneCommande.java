@@ -41,7 +41,10 @@ public class LigneCommande {
         return prixUni;
     }
     
-    // Méthode retournant les informations à écrire dans le fichier en String
+    /*
+    Méthode retournant sous la forme d'une chaine de caractères les 
+    informations à écrire dans le fichier texte.
+    */
     
     public String versFichier(){
         return ref + " : " + nbExempl + " : " + prixUni;

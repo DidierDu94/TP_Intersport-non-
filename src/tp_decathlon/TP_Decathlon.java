@@ -4,6 +4,7 @@ package tp_decathlon;
 // TDTP3: Vente d'équipements sportifs
 
 import java.io.IOException;
+import java.util.Scanner;
 
 // Main class
 
@@ -36,6 +37,7 @@ public class TP_Decathlon {
         //System.out.println(t[2]);
         
         Magasin M = new Magasin("Sport2000");
+        /*
         M.ajout("Escalade", "Corde", 114.99f, 78, 70, 0.01f, 0.400f);
         M.ajout("Natation", "Bonnet", 10, 209, "XL", "bleu");
         M.ajout("Rugby", "Protège dents", 7.99f, 1808, "XXL", "noir", "avancé");
@@ -43,16 +45,24 @@ public class TP_Decathlon {
         M.ajout("Natation", "Ligne d'eau", 395, 50, 25, 0.1f, 60);
         M.ajout("Rugby", "Maillot", 4, 2893, "XXS", "bleu");
         M.ajout("Natation", "Chariot enrouleur", 1751.22f, 23,1.6f, 3, 85);
+        */
         
-        //M.Replacement();
+        M.depuisFichierEquipements();
+        M.depuisFichierCommandes();
         
+        M.choixEquip();
+        
+        Scanner sc = new Scanner(System.in);
+    
+        //M.replacement();
+      
+        // créer une variable pour break;
                     
-       
-                    // créer une vairable pour break;
-                    
-        System.out.println(M.tableau(M.choixEquip()));
+        //System.out.println(M.tableau(M.choixEquip()));
         
         //M.versFichierEquipements();
+        
+        
         
     }
     
