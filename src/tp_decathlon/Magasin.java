@@ -270,6 +270,24 @@ public class Magasin {
         return tab;
     }
     
+    public boolean verifDispo(int qte){
+        
+        int nbxmpl = nbEqpmt.getnbEqpmt();
+        
+        if((nbxmpl)-(qte)<0){
+            return false;   
+        }
+        else{
+           return true; 
+        }   
+    }
+    
+    public int calculDelai(int qte){
+            
+           
+     
+    }
+    
     public void versFichierEquipements() throws IOException{
         FileWriter fich = new FileWriter(fichiEr);          // ovrir le fichier en écriture
         for (int i=0;i<lstEqpmt.length;i++){
@@ -277,8 +295,9 @@ public class Magasin {
                 break;
             }
             String chaine = lstEqpmt[i].versFichier();
-            fich.write(chaine + System.lineSeparator());           // écire dans le fichier
+            fich.write(chaine + System.lineSeparator());           // écrire dans le fichier
         }
+        
         fich.close();                                              // fermer le fichier
     }
     

@@ -1,6 +1,10 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+
+import java.time.LocalDate;
+import java.util.Scanner;
+
 // TDTP3: Vente d'équipements sportifs
 
 public class Equipement {        // Classe mère
@@ -24,7 +28,7 @@ public class Equipement {        // Classe mère
         this.prix = prix;
         this.nbExmpl = nbExmpl;
     }
-    
+     
     // Méthode toString()
     
     @Override
@@ -54,6 +58,31 @@ public class Equipement {        // Classe mère
     public int getnbExmpl(){
         return nbExmpl;
     }
+    
+    public void majDispo(int qte){
+        
+        Scanner sc = new Scanner(System.in);
+        String c;
+        System.out.println("Voulez-vous rajouter/retirer cette quantité à votre liste d'équipement  a/r");
+        c = sc.nextLine();
+        
+        while (!c.equals(null)){
+        
+            if (!c.equals("a") || !c.equals("r")){
+                break;
+            }
+        
+            else if (c.equals("a")){
+                nbExmpl += qte;
+            }
+            
+            else{
+                nbExmpl -= qte;    
+            }
+        }    
+    }
+    
+    
     
     // Setter
     
