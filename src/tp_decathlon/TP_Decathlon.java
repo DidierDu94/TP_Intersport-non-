@@ -44,15 +44,15 @@ public class TP_Decathlon {
         M.ajout("Rugby", "Maillot", 4, 2893, "XXS", "bleu");
         M.ajout("Natation", "Chariot enrouleur", 1751.22f, 23,1.6f, 3, 85);
         
-        M.Replacement();
+        //M.Replacement();
         
                     
        
                     // créer une vairable pour break;
                     
-        //System.out.println(M.tableau(M.choixEquip()));
+        System.out.println(M.tableau(M.choixEquip()));
         
-        M.versFichierEquipements();
+        //M.versFichierEquipements();
         
     }
     

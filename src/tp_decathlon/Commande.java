@@ -18,11 +18,11 @@ public class Commande{
     
     // Constructeur
     
-    public Commande(String numero, String email, LocalDate livraison, LigneCommande[] lignes){
+    public Commande(String numero, String email, LocalDate emission, LocalDate livraison, LigneCommande[] lignes){
         
         this.numero = numero;
         this.email = email;
-        this.emission = LocalDate.now();
+        this.emission = emission;
         this.livraison = livraison;
         while(!livraison.isAfter(emission)){
             System.out.println("La date est incorrecte !");

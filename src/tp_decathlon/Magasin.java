@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 
@@ -335,7 +336,45 @@ public class Magasin {
         fich.close();                                              // fermer le fichier
     }
     
-    public void Replacement(){
+    public void depuisFichierCommandes() throws FileNotFoundException, IOException{
+        FileReader fich = new FileReader(fiChier);          // ouvrir le fichier en lecture
+        BufferedReader br = new BufferedReader(fich);
+        String numero = br.readLine();                          // lire une ligne du fichier
+        while(numero != null){
+            String donnees = br.readLine();
+            String[] info = donnees.split(" : ");
+            String email = info[0];
+            LocalDate emission = dateEcrite(info[1]);
+            LocalDate livraison = dateEcrite(info[2]);
+            float total = Float.valueOf(info[3]);
+            String nombreLignes = br.readLine();
+            int nbL = Integer.valueOf(nombreLignes);
+            LigneCommande[] lignes = new LigneCommande[nbL];
+            for (int i=0;i<nbL;i++){
+                String ligne = br.readLine();
+                String[] bon = ligne.split(" : ");
+                String ref = bon[0];
+                int nbExpl = Integer.valueOf(bon[1]);
+                Equipement eq = recherche(ref);
+                LigneCommande lc = new LigneCommande(nbExpl, eq);
+                lignes[i] = lc;
+            }
+            Commande com = new Commande(numero, email, emission, livraison, lignes);
+            lstCmd[nbCmd] = com;
+            nbCmd++;
+            numero = br.readLine();
+        }
+    }
+    
+    public LocalDate dateEcrite(String date){
+        String[] tab = date.split("-");
+        int annee = Integer.valueOf(tab[0]);
+        int mois = Integer.valueOf(tab[1]);
+        int jour = Integer.valueOf(tab[2]);
+        return LocalDate.of(annee, mois, jour);
+    }
+    
+    public void replacement(){
         
         boolean k = true;
         
