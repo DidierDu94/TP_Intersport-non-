@@ -7,9 +7,9 @@ public class LigneCommande {
     
     // Attributs
     
-    private String ref;      // Référence de l'équipement : 5 caractères
-    private int nbExempl;   // Nombre d'exemplaire commandés par la collectivité
-    private float prixUni;  // Prix unitaire de l'équipement en euros
+    private String ref;    // Référence de l'équipement : 5 caractères
+    private int nbExempl;  // Nombre d'exemplaire commandés par la collectivité
+    private float prixUni; // Prix unitaire de l'équipement en euros
     
     // Constructeur
     
@@ -45,11 +45,14 @@ public class LigneCommande {
     Méthode retournant sous la forme d'une chaine de caractères les 
     informations à écrire dans le fichier texte.
     */
-    
     public String versFichier(){
         return ref + " : " + nbExempl + " : " + prixUni;
     }
     
+    /*
+    Méthode renvoyant true si la valeur de l'appelant est plus que celle de
+    l'argument, c'est-à-dire qu'il doit être rangé après lui.
+    */
     public boolean placeApres(LigneCommande autre){
         String ref_autre = autre.getref();
         int comp = ref.compareTo(ref_autre);

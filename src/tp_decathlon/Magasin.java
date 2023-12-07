@@ -1,6 +1,7 @@
 package tp_decathlon;
 
 // @author Calmet Pierre && Bertin Pierre-Aloïs
+// TDTP3: Vente d'équipements sportifs
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,22 +11,28 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-
 public class Magasin {
     
     // Attributs
     
     private String nom_mag;             // Nom du magasin
     private int nbEqpmt;                // Nombre d'équipement vendus au magasin 
-    private Equipement[] lstEqpmt;      // Ensemble des équipements vendus au magasin
-    private int nbCmd;                  // Nombre de commandes passées depuis le magasin
-    private Commande[] lstCmd;          // Ensemble des commandés passées au magasin
+    private Equipement[] lstEqpmt; // Ensemble des équipements vendus au magasin
+    private int nbCmd;          // Nombre de commandes passées depuis le magasin
+    private Commande[] lstCmd;      // Ensemble des commandés passées au magasin
     
-    private int cptTR;                  // Compteur spécifique pour la référence des équipements de Terrain
-    private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
-    private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
+            // Compteur spécifique pour la référence des équipements de Terrain
+    private int cptTR;
+            // Compteur spécifique pour la référence des équipements de Joueurs
+    private int cptJO;
+   // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
+    private int cptPR;
     
+    /*Fichier où sont stockés toutes les informations concernant les équipements
+    vendus par le magasin.*/
     private static final String FichierEquipements = "FichierEquipements.txt";
+    /*Fichier où sont stockés toutes les informations concernant les commandes
+    passées dans le magasin.*/
     private static final String FichierCommandes = "FichierCommandes.txt";
     
     // Constructeur
@@ -34,8 +41,18 @@ public class Magasin {
     
         this.nom_mag = nom_mag;
         
+        /*
+        Nous avons choisi pour la taille de la liste d'équipememnts une valeur
+        de 3000, puisqu'il s'agit du maximum possible pour les références.
+        Elles vont de 000 à 999 ce qui fait 1000 (*3 = 3000).
+        */
         lstEqpmt = new Equipement[3000];
         nbEqpmt = 0;
+        /*
+        Nous avons choisi pour la taille de la liste de commandes une valeur de
+        10000, puisque c'est le maximum possible pour les références.
+        Elles vont de 0000 à 9999 ce qui fait 10000.
+        */
         lstCmd = new Commande[10000];
         nbCmd = 0;
         
@@ -76,9 +93,11 @@ public class Magasin {
         return lstCmd;
     }
     
-    // Autres méthodes
-    
-    static public String tableau(Object[] tab){  // Méthode renvoyant une String sous forme d'un tableau en affichant un élément par ligne.
+    /*
+    Méthode renvoyant une chaîne de caractères sous forme d'un tableau
+    en affichant un élément par ligne.
+    */
+    static public String tableau(Object[] tab){
         int cpt = 0;
         for (int i=0 ; i <= tab.length-1 ; i++){
             if (tab[i] == null){
@@ -94,6 +113,8 @@ public class Magasin {
         return tabGrille;
     }
     
+    
+    // Méthode permettant de créer la référence des équipements.
     public String reference(String type, int cpt){
         String nbRef;
         if (cpt<=9){
@@ -107,6 +128,14 @@ public class Magasin {
         return ref;
     }
     
+    
+    // Méthodes ajout() pourn les équipements
+    
+    /*
+    Ces méthodes permettent d'ajouter des équipements au magasin.
+    Elles sont définis par surcharge et permettent de créer les 3 (ou 4)
+    instances possibles.
+    */
     public void ajout(String sport, String nom, float prix, int nbExmpl, float poids){
         String ref = reference("TR", cptTR);
         String test;
@@ -191,6 +220,7 @@ public class Magasin {
         replacement();
     }
     
+    // Méthode retournant un équipement d'après sa référence.
     public Equipement recherche(String refEq){
         for (int i=0;i<=lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
@@ -204,6 +234,11 @@ public class Magasin {
         return null;
     }
     
+    /*
+    Cette méthode permet d'afficher tous les équipements correspondant au type
+    et au sport souhaité.
+    Elle utilise la méthode tableau() pour la mise en forme.
+    */
     public void affichage(char type, String sport){
         Equipement[] tabSport = new Equipement[1000];
         int cpt = 0;
@@ -225,6 +260,7 @@ public class Magasin {
         System.out.println(grilleAffichage);
     }
     
+    
     public LigneCommande[] choixEquip(){
         Scanner sc = new Scanner(System.in);
         LigneCommande[] tab = new LigneCommande[3000];
@@ -232,22 +268,27 @@ public class Magasin {
         
         while (true){
             String typeEq = "";
-            while (!typeEq.equalsIgnoreCase(" ") && !typeEq.equalsIgnoreCase("T") && !typeEq.equalsIgnoreCase("J") && !typeEq.equalsIgnoreCase("P")){
+            while (!typeEq.equalsIgnoreCase(" ") 
+                    && !typeEq.equalsIgnoreCase("T") 
+                    && !typeEq.equalsIgnoreCase("J") 
+                    && !typeEq.equalsIgnoreCase("P")){
                 System.out.println("""
-                    Veuillez choisir le type d'équipement en tapant la lettre correspondante
-                    ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
-                    Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
+Veuillez choisir le type d'équipement en tapant la lettre correspondante
+( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
+Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
                 typeEq = sc.nextLine();
             }
             if (typeEq.equalsIgnoreCase(" ")){
                 break;
             }
-            System.out.println("Veuillez maintenant choisir le sport de votre choîx.");
+            System.out.println("Veuillez maintenant choisir le sport"
+                    + " de votre choîx.");
             String sp = sc.nextLine();
             
             affichage(typeEq.toUpperCase().charAt(0),sp);
             
-            System.out.println("Veuillez maintenant choisir l'équipement de votre choîx en recopiant sa référence.");
+            System.out.println("Veuillez maintenant choisir l'équipement"
+                    + " de votre choîx en recopiant sa référence.");
             String ref = sc.nextLine();
             
             Equipement eq = recherche(ref);
@@ -257,7 +298,8 @@ public class Magasin {
             
             int nb = 0;
             while (nb<=0){
-                System.out.println("Veuillez indiquer le nombre d'exmplaire de votre choîx.");
+                System.out.println("Veuillez indiquer le nombre d'exmplaire"
+                        + " de votre choîx.");
                 nb = sc.nextInt();
             }
             

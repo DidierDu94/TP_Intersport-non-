@@ -7,8 +7,10 @@ public class Joueurs extends Equipement{  // Super classe de ProtectionJoueurs
     
     //Attributs
     
-    private String taille;   // Taille de l'équipement : 3XS / XXS / XS / S / M / M/L / L / XL / XXL / 3XL / 4XL / 5XL
-    private String coloris; // Coloris de l'équipement (ex : bleu, rouge, transparent...)
+    private String taille;   // Taille de l'équipement
+              // (3XS / XXS / XS / S / M / M/L / L / XL / XXL / 3XL / 4XL / 5XL)
+    private String coloris; // Coloris de l'équipement
+                            // (ex : bleu, rouge, transparent...)
     
     //Constructeur
     
@@ -41,7 +43,6 @@ public class Joueurs extends Equipement{  // Super classe de ProtectionJoueurs
     Méthode retournant sous la forme d'une chaine de caractères les 
     informations à écrire dans le fichier texte.
     */
-    
     @Override
     public String versFichier(){  
         return super.versFichier() + " : " + taille + " : " + coloris;

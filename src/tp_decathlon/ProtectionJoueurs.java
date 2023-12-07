@@ -8,7 +8,7 @@ public class ProtectionJoueurs extends Joueurs{
     // Attribut
     
     private String niveau; // Niveau de pratique auquel l'équipement est destiné
-                                    // débutant / régulier / expert
+                                    // (débutant / régulier / expert)
     
     // Constructeur
     
@@ -36,7 +36,6 @@ public class ProtectionJoueurs extends Joueurs{
     Méthode retournant sous la forme d'une chaine de caractères les 
     informations à écrire dans le fichier texte.
     */
-    
     @Override
     public String versFichier(){
         return super.versFichier() + " : " + niveau; 
