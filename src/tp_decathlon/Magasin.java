@@ -113,7 +113,6 @@ public class Magasin {
         return tabGrille;
     }
     
-    
     // Méthode permettant de créer la référence des équipements.
     public String reference(String type, int cpt){
         String nbRef;
@@ -154,7 +153,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
         cptTR += 1;
         nbEqpmt += 1;
-        replacement();
+        replacement();          // On met les éléments dans l'ordre.
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, float hauteur, float largeur, float poids){
@@ -175,7 +174,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
         cptTR += 1;
         nbEqpmt += 1;
-        replacement();
+        replacement();                  // On met les éléments dans l'ordre.
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris){
@@ -196,7 +195,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = JO;
         cptJO += 1;
         nbEqpmt += 1;
-        replacement();
+        replacement();              // On met les éléments dans l'ordre.
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris, String niveau){
@@ -217,7 +216,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = PR;
         cptPR += 1;
         nbEqpmt += 1;
-        replacement();
+        replacement();                  // On met les éléments dans l'ordre.
     }
     
     // Méthode retournant un équipement d'après sa référence.
@@ -260,12 +259,24 @@ public class Magasin {
         System.out.println(grilleAffichage);
     }
     
+    /*
+    Cette méthode permet à un acheteur de choisir les équipements qu'il
+    souhaite commander.
     
+    Au début, on crée le scanner et le tableau qui contiendra
+    les lignes de commande.
+    */
     public LigneCommande[] choixEquip(){
         Scanner sc = new Scanner(System.in);
         LigneCommande[] tab = new LigneCommande[3000];
         int cpt = 0;
         
+        /*
+        On rentre ensuite dans une grande boucle où l'acheteur peut choisir un à
+        un ses équipements.
+        Il tape tout d'abord la lettre correspondant au type d'équipement.
+        Il peut aussi finir sa commande en tapant 'Espace'.
+        */
         while (true){
             String typeEq = "";
             while (!typeEq.equalsIgnoreCase(" ") 
@@ -281,21 +292,44 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             if (typeEq.equalsIgnoreCase(" ")){
                 break;
             }
+            
+            /*
+            Ensuite il indique le sport.
+            Ici, il n'y a pas de boucle donc si le nom du sport est mal
+            orthographié, l'équipement ne sera pas trouvé dans la liste.
+            */
             System.out.println("Veuillez maintenant choisir le sport"
                     + " de votre choîx.");
             String sp = sc.nextLine();
             
+            /*
+            On lui affiche ensuite les équipements disponible en magasin et
+            correspondant à sa recherche.
+            */
             affichage(typeEq.toUpperCase().charAt(0),sp);
             
+            /*
+            Parmi la liste qu'il peut voir, il choisit son équipement en
+            rentrant sa référence. Ici aussi la syntaxe est importante.
+            Il doit faire attention parce qu'il peut auusi sélectionner un autre
+            équipement qui n'apparait pas dasn le tableau en écrivant sa
+            référence.
+            */
             System.out.println("Veuillez maintenant choisir l'équipement"
                     + " de votre choîx en recopiant sa référence.");
             String ref = sc.nextLine();
             
+            // Si la référence ne correspond à rien, il recommence du début.
             Equipement eq = recherche(ref);
             if (eq == null){
                 continue;
             }
             
+            /*
+            L'utilisateur choisit enfin le nombre d'exemplaire qu'il souhaite.
+            En ce mettant dans une boucle avec une petite condition, on s'assure
+            que la valeur rentré n'est pas négative (cela n'aurait pas de sens).
+            */
             int nb = 0;
             while (nb<=0){
                 System.out.println("Veuillez indiquer le nombre d'exmplaire"
@@ -305,6 +339,10 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             
             sc.nextLine();
             
+            /*
+            On crée donc l'instance LigneCommande, on la met dans le tableau et
+            on recommence.
+            */
             LigneCommande ligne = new LigneCommande(nb, eq);
             tab[cpt] = ligne;
             cpt++;
@@ -312,23 +350,30 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         return tab;
     }
     
+    /*
+    Cette méthode permet de sauvegarder les équipements disponibles en magasin
+    et leurs informations dans un fichier texte (.txt).
+    */
     public void versFichierEquipements() throws IOException{
-        FileWriter fich = new FileWriter(FichierEquipements);          // ouvrir le fichier en écriture
+                                            // ouvrir le fichier en écriture
+        FileWriter fich = new FileWriter(FichierEquipements);
         for (int i=0;i<lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
                 break;
             }
             String chaine = lstEqpmt[i].versFichier();
-            fich.write(chaine + System.lineSeparator());           // écrire dans le fichier
+                                                    // écrire dans le fichier
+            fich.write(chaine + System.lineSeparator());
         }
-        
-        fich.close();                                              // fermer le fichier
+        fich.close();                                     // fermer le fichier
     }
     
-    public void depuisFichierEquipements() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(FichierEquipements);          // ouvrir le fichier en lecture
+    public void depuisFichierEquipements() throws FileNotFoundException,
+            IOException{
+                                                // ouvrir le fichier en lecture
+        FileReader fich = new FileReader(FichierEquipements);
         BufferedReader br = new BufferedReader(fich);
-        String reference = br.readLine();                          // lire une ligne du fichier
+        String reference = br.readLine();          // lire une ligne du fichier
         while(reference != null){
             String ligne = br.readLine();
             String[] tab = ligne.split(" : ");
@@ -339,32 +384,40 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             if(reference.startsWith("JO")){
                 String taille = tab[4];
                 String coloris = tab[5];
-                Joueurs j = new Joueurs(reference, sport, nom, prix, nbExpl, taille, coloris);
+                Joueurs j = new Joueurs(reference, sport, nom, prix,
+                        nbExpl, taille, coloris);
                 lstEqpmt[nbEqpmt] = j;
                 nbEqpmt += 1;
             }else if(reference.startsWith("PR")){
                 String taille = tab[4];
                 String coloris = tab[5];
                 String niveau = tab[6];
-                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport, nom, prix, nbExpl, taille, coloris, niveau);
+                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport,
+                        nom, prix, nbExpl, taille, coloris, niveau);
                 lstEqpmt[nbEqpmt] = p;
                 nbEqpmt += 1;
             }else{
                 float hauteur = Float.valueOf(tab[4]);
                 float largeur = Float.valueOf(tab[5]);
                 float poids = Float.valueOf(tab[6]);
-                Terrain t = new Terrain(reference, sport, nom, prix, nbExpl, hauteur, largeur, poids);
+                Terrain t = new Terrain(reference, sport, nom, prix,
+                        nbExpl, hauteur, largeur, poids);
                 lstEqpmt[nbEqpmt] = t;
                 nbEqpmt += 1;
             }
             reference = br.readLine();
         }
-        replacement();
-        fich.close();
+        replacement();              // On met les éléments dans l'ordre.
+        fich.close();                                     // fermer le fichier
     }
     
+    /*
+    Cette méthode permet de sauvegarder les commandes passées dans le magasin
+    et leurs informations dans un fichier texte (.txt).
+    */
     public void versFichierCommandes() throws IOException{
-        FileWriter fich = new FileWriter(FichierCommandes);  // ouvrir le fichier en écriture
+                                            // ouvrir le fichier en écriture
+        FileWriter fich = new FileWriter(FichierCommandes);
         for (int i=0;i<lstCmd.length;i++){
             if (lstCmd[i] == null){
                 break;
@@ -378,15 +431,18 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
                 }
                 chaine += tabLignes[j].versFichier() + System.lineSeparator();
             }
-            fich.write(lignCom + System.lineSeparator() + chaine); // écire dans le fichier
+                                                       // écire dans le fichier
+            fich.write(lignCom + System.lineSeparator() + chaine);
         }
-        fich.close();                                              // fermer le fichier
+        fich.close();                                  // fermer le fichier
     }
     
-    public void depuisFichierCommandes() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(FichierCommandes);          // ouvrir le fichier en lecture
+    public void depuisFichierCommandes() throws FileNotFoundException,
+            IOException{
+                                                // ouvrir le fichier en lecture
+        FileReader fich = new FileReader(FichierCommandes);
         BufferedReader br = new BufferedReader(fich);
-        String numero = br.readLine();                          // lire une ligne du fichier
+        String numero = br.readLine();             // lire une ligne du fichier
         while(numero != null){
             String donnees = br.readLine();
             String[] info = donnees.split(" : ");
@@ -406,15 +462,17 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
                 LigneCommande lc = new LigneCommande(nbExpl, eq);
                 lignes[i] = lc;
             }
-            Commande com = new Commande(numero, email, emission, livraison, lignes);
+            Commande com = new Commande(numero, email, emission, livraison,
+                    lignes);
             lstCmd[nbCmd] = com;
             nbCmd++;
             numero = br.readLine();
         }
-        classement();
-        fich.close();
+        classement();                   // On met les éléments dans l'ordre.
+        fich.close();                                   // fermer le fichier
     }
     
+    // Méthode transformant une chaîne en date.
     public LocalDate dateEcrite(String date){
         String[] tab = date.split("-");
         int annee = Integer.valueOf(tab[0]);
@@ -423,8 +481,8 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         return LocalDate.of(annee, mois, jour);
     }
     
+    // Méthode permettant de mettre les équipements dans l'ordre dans le tableau.
     public void replacement(){
-        
         for (int i=0;i<lstEqpmt.length-1;i++){
             if (lstEqpmt[i+1] == null){
                 break;
@@ -443,13 +501,19 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         }
     }
     
+    /*
+    Cette méthode permet à un acheteur de faire sa commmande.
+    Il écrit son adresse électronique puis choisit ses équipements grâce à la
+    méthode choixEquip().
+    */
     public void ajout(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez nous indiquer votre adresse courriel :");
         String email = sc.nextLine().toLowerCase();
-        System.out.println("Vous allez maintenant choisir les équipements que vous voulez acheter.");
+        System.out.println("Vous allez maintenant choisir les équipements que"
+                + " vous voulez acheter.");
         LigneCommande[] materiel = choixEquip();
-        tri(materiel);
+        tri(materiel);          // On met les éléments dans l'ordre.
         float total = 0f;
         long delai = 0L;
         for(int i=0;i<materiel.length;i++){
@@ -480,15 +544,25 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
                 cpt = reference(nbCmd);
             }
         }
+        
+        /*
+        Après avoir récupéré toutes les informations de la commande, on la crée
+        et on l'ajoute à la liste.
+        On donne ensuite un petit récapitulatif de la commande à l'acheteur.
+        */
         Commande com = new Commande(num, email, emission, livraison, materiel);
         lstCmd[nbCmd] = com;
-        System.out.println("Votre commande s'élève à un montant de " + com.gettotal() + " €.");
-        System.out.println("Elle vous sera livrée le " + com.getlivraison() + ".");
-        System.out.println("Votre numéro de commande est le : " + com.getnumero());
+        System.out.println("Votre commande s'élève à un montant de "
+                + com.gettotal() + " €.");
+        System.out.println("Elle vous sera livrée le " + com.getlivraison()
+                + ".");
+        System.out.println("Votre numéro de commande est le : "
+                + com.getnumero());
         nbCmd++;
-        classement();
+        classement();                   // On met les éléments dans l'ordre.
     }
     
+    // Méthode permettant de créer la référence des commandes.
     public String reference(int cp){
         String cpt;
         if(nbCmd<10){
@@ -503,6 +577,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         return cpt;
     }
     
+    // Méthode qui affiche les commandes passées par une collectivité donnée.
     public void affichage(String courriel){
         System.out.println("Voici les commandes effectuées par "+courriel+" :");
         for(int i=0;i<lstCmd.length;i++){
@@ -516,6 +591,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         }
     }
     
+    // Méthode affichant les commande devant être livrée avant une date précise.
     public void affichage(LocalDate date){
         System.out.println("Voici les commandes devant être livrées après : "
                 + date);
@@ -530,6 +606,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         }
     }
     
+    // Méthode permettant de mettre les commandes dans l'ordre dans le tableau.
     public void classement(){
         for (int i=0;i<lstCmd.length-1;i++){
             if (lstCmd[i+1] == null){
@@ -549,6 +626,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         }
     }
     
+    // Méthode permettant de mettre les lignes dans l'ordre dans le tableau.
     public void tri(LigneCommande[] element){
         for (int i=0;i<element.length-1;i++){
             if (element[i+1] == null){
@@ -567,5 +645,4 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             }
         }
     }
-    
 }
