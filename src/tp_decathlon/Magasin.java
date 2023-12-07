@@ -368,6 +368,10 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         fich.close();                                     // fermer le fichier
     }
     
+    /*
+    Méthode permettant d'importer les informations d'un magasin depuis un
+    fichier texte (.txt).
+    */
     public void depuisFichierEquipements() throws FileNotFoundException,
             IOException{
                                                 // ouvrir le fichier en lecture
@@ -437,6 +441,10 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         fich.close();                                  // fermer le fichier
     }
     
+    /*
+    Méthode permettant d'importer les informations d'un magasin depuis un
+    fichier texte (.txt).
+    */
     public void depuisFichierCommandes() throws FileNotFoundException,
             IOException{
                                                 // ouvrir le fichier en lecture
