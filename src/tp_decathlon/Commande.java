@@ -10,20 +10,17 @@ public class Commande{
     // Attributs
     
     private String numero;              // Numéro de la commande : 8 caractères
-                        // Adresse mail de la collectivité qui a passé commande
-    private String email;
+    private String email;               // Adresse mail de la collectivité qui a passé commande
     private LocalDate emission;         // Date d’émission de la commande
     private LocalDate livraison;        // Date de livraison prévue
     private float total;                // Coût total de la commande en euros
-                    // Tableau contenant les différentes lignes de la commande
-    private LigneCommande[] lignes;
-                        // Nombre de lignes de commande dans le tableau lignes
-    private int nbLignes;
+    private LigneCommande[] lignes;     // Tableau contenant les différentes lignes de la commande
+
+    private int nbLignes;               // Nombre de lignes de commande dans le tableau lignes
     
     // Constructeur
     
-    public Commande(String numero, String email, LocalDate emission,
-            LocalDate livraison, LigneCommande[] lignes){
+    public Commande(String numero, String email, LocalDate emission, LocalDate livraison, LigneCommande[] lignes){
         
         this.numero = numero;
         this.email = email;
@@ -56,8 +53,7 @@ public class Commande{
     @Override
     public String toString(){
         String tabLignes = Magasin.tableau(lignes);
-        return numero + " " + email + " " + emission + " " + livraison 
-               + " " + total + "\n" + tabLignes;
+        return numero + " " + email + " " + emission + " " + livraison + " " + total + "\n" + tabLignes;
     }
     
     // Getters
@@ -91,8 +87,7 @@ public class Commande{
     informations à écrire dans le fichier texte.
     */
     public String versFichier(){
-        return numero + System.lineSeparator() + email + " : " + emission
-       + " : " + livraison + " : " + total + System.lineSeparator() + nbLignes;
+        return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + nbLignes;
     }
     
     /*

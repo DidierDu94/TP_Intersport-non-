@@ -13,8 +13,7 @@ public class Terrain extends Equipement{
     
     //Constructeurs
     
-    public Terrain(String ref, String sport, String nom, float prix,
-            int nbExmpl, float hauteur, float largeur, float poids){
+    public Terrain(String ref, String sport, String nom, float prix, int nbExmpl, float hauteur, float largeur, float poids){
         
         super(ref, sport, nom, prix, nbExmpl);
         
@@ -23,8 +22,7 @@ public class Terrain extends Equipement{
         this.poids = poids;
     }
     
-    public Terrain(String ref, String sport, String nom, float prix,
-            int nbExmpl, float poids){
+    public Terrain(String ref, String sport, String nom, float prix, int nbExmpl, float poids){
         
         super(ref, sport, nom, prix, nbExmpl);
         
@@ -58,8 +56,7 @@ public class Terrain extends Equipement{
     */
     @Override
     public String versFichier(){
-        return super.versFichier() + " : " + hauteur + " : " + largeur + " : "
-                + poids;
+        return super.versFichier() + " : " + hauteur + " : " + largeur + " : " + poids;
     }
     
     /*

@@ -51,8 +51,7 @@ public class TP_Decathlon {
                     Un acheteur ? Tapez 'A' puis 'Entrée'.
                     Un fournisseur ? Tapez 'F' puis 'Entrée'.
                     Un employé du magasin ? Tapez 'E' puis 'Entrée'.""");
-                System.out.println("Si vous ne correspondez pas à ces"
-                        + " descriptions, tapez 'Espace' puis 'Entrée'.");
+                System.out.println("Si vous ne correspondez pas à ces descriptions, tapez 'Espace' puis 'Entrée'.");
                 perso = sc.nextLine();
                 perso = perso.toUpperCase();
             }
@@ -128,29 +127,22 @@ public class TP_Decathlon {
                 case "E":
                     System.out.println("Vous êtes donc employé chez nous.");
                     String but = "";
-                    while (!but.equalsIgnoreCase("C")
-                            && !but.equalsIgnoreCase("D")){
+                    while (!but.equalsIgnoreCase("C") && !but.equalsIgnoreCase("D")){
                         System.out.print("""
-    Que souhaitez-vous faire ?
-    Voir la liste des commandes selon la collectivité ? Tapez 'C' puis 'Entrée'.
-    Voir la liste des commandes à livrer après une date particulière ? """);
-                        System.out.println("Tapez 'D' puis 'Entrée'.");
+                            Que souhaitez-vous faire ?
+                            Voir la liste des commandes selon la collectivité ? Tapez 'C' puis 'Entrée'.
+                            Voir la liste des commandes à livrer après une date particulière ? Tapez 'D' puis 'Entrée'.""");
                         but = sc.nextLine();
                     }
                     if(but.equalsIgnoreCase("C")){
-                        System.out.println("Veuillez indiquer le courriel"
-                                + " de la collectivité recherchée.");
+                        System.out.println("Veuillez indiquer le courriel de la collectivité recherchée.");
                         String adresse = sc.nextLine();
                         M.affichage(adresse);
                         break;
                     }else{
-                        System.out.println("Veuillez indiquer la date voulue"
-                                + " séparé par '-' (exemple : 1963-11-22).");
+                        System.out.println("Veuillez indiquer la date voulue séparé par '-' (exemple : 1963-11-22).");
                         String[] date = sc.nextLine().split("-");
-                        LocalDate limit = LocalDate.of(
-                                Integer.valueOf(date[0]),
-                                Integer.valueOf(date[1]),
-                                Integer.valueOf(date[2]));
+                        LocalDate limit = LocalDate.of(Integer.valueOf(date[0]), Integer.valueOf(date[1]), Integer.valueOf(date[2]));
                         M.affichage(limit);
                         break;
                     }

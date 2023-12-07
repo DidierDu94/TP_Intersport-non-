@@ -17,16 +17,13 @@ public class Magasin {
     
     private String nom_mag;             // Nom du magasin
     private int nbEqpmt;                // Nombre d'équipement vendus au magasin 
-    private Equipement[] lstEqpmt; // Ensemble des équipements vendus au magasin
-    private int nbCmd;          // Nombre de commandes passées depuis le magasin
-    private Commande[] lstCmd;      // Ensemble des commandés passées au magasin
+    private Equipement[] lstEqpmt;      // Ensemble des équipements vendus au magasin
+    private int nbCmd;                  // Nombre de commandes passées depuis le magasin
+    private Commande[] lstCmd;          // Ensemble des commandés passées au magasin
     
-            // Compteur spécifique pour la référence des équipements de Terrain
-    private int cptTR;
-            // Compteur spécifique pour la référence des équipements de Joueurs
-    private int cptJO;
-   // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
-    private int cptPR;
+    private int cptTR;                  // Compteur spécifique pour la référence des équipements de Terrain
+    private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
+    private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
     
     /*Fichier où sont stockés toutes les informations concernant les équipements
     vendus par le magasin.*/
@@ -67,8 +64,8 @@ public class Magasin {
     public String toString(){
         String tabEqpmt = tableau(lstEqpmt);
         String tabCmd = tableau(lstCmd);
-        return nom_mag + "\n" + "Liste des équipements vendus :" + "\n" + tabEqpmt + "\n"
-                + "Liste des commandes passées au magasin :" + "\n" + tabCmd ;
+        return nom_mag + "\n" + "Liste des équipements vendus :" + "\n" + tabEqpmt
+                + "\n" + "Liste des commandes passées au magasin :" + "\n" + tabCmd ;
     }
     
     // Getters
@@ -284,9 +281,9 @@ public class Magasin {
                     && !typeEq.equalsIgnoreCase("J") 
                     && !typeEq.equalsIgnoreCase("P")){
                 System.out.println("""
-Veuillez choisir le type d'équipement en tapant la lettre correspondante
-( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
-Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
+                    Veuillez choisir le type d'équipement en tapant la lettre correspondante
+                    ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
+                    Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
                 typeEq = sc.nextLine();
             }
             if (typeEq.equalsIgnoreCase(" ")){
@@ -298,8 +295,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             Ici, il n'y a pas de boucle donc si le nom du sport est mal
             orthographié, l'équipement ne sera pas trouvé dans la liste.
             */
-            System.out.println("Veuillez maintenant choisir le sport"
-                    + " de votre choîx.");
+            System.out.println("Veuillez maintenant choisir le sport de votre choîx.");
             String sp = sc.nextLine();
             
             /*
@@ -315,8 +311,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             équipement qui n'apparait pas dasn le tableau en écrivant sa
             référence.
             */
-            System.out.println("Veuillez maintenant choisir l'équipement"
-                    + " de votre choîx en recopiant sa référence.");
+            System.out.println("Veuillez maintenant choisir l'équipement de votre choîx en recopiant sa référence.");
             String ref = sc.nextLine();
             
             // Si la référence ne correspond à rien, il recommence du début.
@@ -332,8 +327,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             */
             int nb = 0;
             while (nb<=0){
-                System.out.println("Veuillez indiquer le nombre d'exmplaire"
-                        + " de votre choîx.");
+                System.out.println("Veuillez indiquer le nombre d'exmplaire de votre choîx.");
                 nb = sc.nextInt();
             }
             
@@ -355,29 +349,25 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
     et leurs informations dans un fichier texte (.txt).
     */
     public void versFichierEquipements() throws IOException{
-                                            // ouvrir le fichier en écriture
-        FileWriter fich = new FileWriter(FichierEquipements);
+        FileWriter fich = new FileWriter(FichierEquipements);       // ouvrir le fichier en écriture
         for (int i=0;i<lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
                 break;
             }
             String chaine = lstEqpmt[i].versFichier();
-                                                    // écrire dans le fichier
-            fich.write(chaine + System.lineSeparator());
+            fich.write(chaine + System.lineSeparator());                    // écrire dans le fichier
         }
-        fich.close();                                     // fermer le fichier
+        fich.close();                                                       // fermer le fichier
     }
     
     /*
     Méthode permettant d'importer les informations d'un magasin depuis un
     fichier texte (.txt).
     */
-    public void depuisFichierEquipements() throws FileNotFoundException,
-            IOException{
-                                                // ouvrir le fichier en lecture
-        FileReader fich = new FileReader(FichierEquipements);
+    public void depuisFichierEquipements() throws FileNotFoundException, IOException{
+        FileReader fich = new FileReader(FichierEquipements);       // ouvrir le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
-        String reference = br.readLine();          // lire une ligne du fichier
+        String reference = br.readLine();                                  // lire une ligne du fichier
         while(reference != null){
             String ligne = br.readLine();
             String[] tab = ligne.split(" : ");
@@ -388,24 +378,21 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
             if(reference.startsWith("JO")){
                 String taille = tab[4];
                 String coloris = tab[5];
-                Joueurs j = new Joueurs(reference, sport, nom, prix,
-                        nbExpl, taille, coloris);
+                Joueurs j = new Joueurs(reference, sport, nom, prix, nbExpl, taille, coloris);
                 lstEqpmt[nbEqpmt] = j;
                 nbEqpmt += 1;
             }else if(reference.startsWith("PR")){
                 String taille = tab[4];
                 String coloris = tab[5];
                 String niveau = tab[6];
-                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport,
-                        nom, prix, nbExpl, taille, coloris, niveau);
+                ProtectionJoueurs p = new ProtectionJoueurs(reference, sport, nom, prix, nbExpl, taille, coloris, niveau);
                 lstEqpmt[nbEqpmt] = p;
                 nbEqpmt += 1;
             }else{
                 float hauteur = Float.valueOf(tab[4]);
                 float largeur = Float.valueOf(tab[5]);
                 float poids = Float.valueOf(tab[6]);
-                Terrain t = new Terrain(reference, sport, nom, prix,
-                        nbExpl, hauteur, largeur, poids);
+                Terrain t = new Terrain(reference, sport, nom, prix, nbExpl, hauteur, largeur, poids);
                 lstEqpmt[nbEqpmt] = t;
                 nbEqpmt += 1;
             }
@@ -420,8 +407,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
     et leurs informations dans un fichier texte (.txt).
     */
     public void versFichierCommandes() throws IOException{
-                                            // ouvrir le fichier en écriture
-        FileWriter fich = new FileWriter(FichierCommandes);
+        FileWriter fich = new FileWriter(FichierCommandes);         // ouvrir le fichier en écriture
         for (int i=0;i<lstCmd.length;i++){
             if (lstCmd[i] == null){
                 break;
@@ -435,8 +421,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
                 }
                 chaine += tabLignes[j].versFichier() + System.lineSeparator();
             }
-                                                       // écire dans le fichier
-            fich.write(lignCom + System.lineSeparator() + chaine);
+            fich.write(lignCom + System.lineSeparator() + chaine);          // écire dans le fichier
         }
         fich.close();                                  // fermer le fichier
     }
@@ -445,12 +430,10 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
     Méthode permettant d'importer les informations d'un magasin depuis un
     fichier texte (.txt).
     */
-    public void depuisFichierCommandes() throws FileNotFoundException,
-            IOException{
-                                                // ouvrir le fichier en lecture
-        FileReader fich = new FileReader(FichierCommandes);
+    public void depuisFichierCommandes() throws FileNotFoundException, IOException{
+        FileReader fich = new FileReader(FichierCommandes);     // ouvrir le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
-        String numero = br.readLine();             // lire une ligne du fichier
+        String numero = br.readLine();                                 // lire une ligne du fichier
         while(numero != null){
             String donnees = br.readLine();
             String[] info = donnees.split(" : ");
@@ -470,8 +453,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
                 LigneCommande lc = new LigneCommande(nbExpl, eq);
                 lignes[i] = lc;
             }
-            Commande com = new Commande(numero, email, emission, livraison,
-                    lignes);
+            Commande com = new Commande(numero, email, emission, livraison, lignes);
             lstCmd[nbCmd] = com;
             nbCmd++;
             numero = br.readLine();
@@ -518,8 +500,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez nous indiquer votre adresse courriel :");
         String email = sc.nextLine().toLowerCase();
-        System.out.println("Vous allez maintenant choisir les équipements que"
-                + " vous voulez acheter.");
+        System.out.println("Vous allez maintenant choisir les équipements que vous voulez acheter.");
         LigneCommande[] materiel = choixEquip();
         tri(materiel);          // On met les éléments dans l'ordre.
         float total = 0f;
@@ -560,12 +541,9 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
         */
         Commande com = new Commande(num, email, emission, livraison, materiel);
         lstCmd[nbCmd] = com;
-        System.out.println("Votre commande s'élève à un montant de "
-                + com.gettotal() + " €.");
-        System.out.println("Elle vous sera livrée le " + com.getlivraison()
-                + ".");
-        System.out.println("Votre numéro de commande est le : "
-                + com.getnumero());
+        System.out.println("Votre commande s'élève à un montant de " + com.gettotal() + " €.");
+        System.out.println("Elle vous sera livrée le " + com.getlivraison() + ".");
+        System.out.println("Votre numéro de commande est le : " + com.getnumero());
         nbCmd++;
         classement();                   // On met les éléments dans l'ordre.
     }
@@ -601,8 +579,7 @@ Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""")
     
     // Méthode affichant les commande devant être livrée avant une date précise.
     public void affichage(LocalDate date){
-        System.out.println("Voici les commandes devant être livrées après : "
-                + date);
+        System.out.println("Voici les commandes devant être livrées après : " + date);
         for(int i=0;i<lstCmd.length;i++){
             if(lstCmd[i]==null){
                 break;

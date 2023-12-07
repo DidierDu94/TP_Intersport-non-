@@ -14,8 +14,7 @@ public class Joueurs extends Equipement{  // Super classe de ProtectionJoueurs
     
     //Constructeur
     
-    public Joueurs(String ref, String sport, String nom, float prix, int nbExmpl
-                   , String taille, String coloris){
+    public Joueurs(String ref, String sport, String nom, float prix, int nbExmpl , String taille, String coloris){
         
         super(ref, sport, nom, prix, nbExmpl);
         this.taille = taille;

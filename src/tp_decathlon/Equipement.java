@@ -15,8 +15,7 @@ public class Equipement {        // Classe mère
     
     // Constructeur
     
-    public Equipement(String ref, String sport, String nom, float prix,
-            int nbExmpl){
+    public Equipement(String ref, String sport, String nom, float prix, int nbExmpl){
         
         this.ref = ref;
         this.sport = sport;
@@ -97,8 +96,7 @@ public class Equipement {        // Classe mère
     sous forme de chaîne de caractères.
     */
     public String versFichier(){
-        return ref + System.lineSeparator() + sport + " : " + nom + " : " 
-                + prix + " : " + nbExmpl;
+        return ref + System.lineSeparator() + sport + " : " + nom + " : " + prix + " : " + nbExmpl;
     }
     
 }
