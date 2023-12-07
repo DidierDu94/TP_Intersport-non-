@@ -25,8 +25,8 @@ public class Magasin {
     private int cptJO;                  // Compteur spécifique pour la référence des équipements de Joueurs
     private int cptPR;                  // Compteur spécifique pour la référence des équipements de ProtectionJoueurs
     
-    private static final String fichiEr = "fichiEr.txt";
-    private static final String fiChier = "fiChier.txt";
+    private static final String FichierEquipements = "FichierEquipements.txt";
+    private static final String FichierCommandes = "FichierCommandes.txt";
     
     // Constructeur
     
@@ -125,6 +125,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
         cptTR += 1;
         nbEqpmt += 1;
+        replacement();
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, float hauteur, float largeur, float poids){
@@ -145,6 +146,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = TR;
         cptTR += 1;
         nbEqpmt += 1;
+        replacement();
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris){
@@ -165,6 +167,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = JO;
         cptJO += 1;
         nbEqpmt += 1;
+        replacement();
     }
     
     public void ajout(String sport, String nom, float prix, int nbExmpl, String taille, String coloris, String niveau){
@@ -185,6 +188,7 @@ public class Magasin {
         lstEqpmt[cptTR+cptJO+cptPR] = PR;
         cptPR += 1;
         nbEqpmt += 1;
+        replacement();
     }
     
     public Equipement recherche(String refEq){
@@ -201,9 +205,6 @@ public class Magasin {
     }
     
     public void affichage(char type, String sport){
-        /*Dans cette méthode, nous n'avons pas utilisé Equipement.placeApres
-        puisque tous nos tests nous ont montrés que les équipements étaient
-        déjà dans le bonne ordre.*/
         Equipement[] tabSport = new Equipement[1000];
         int cpt = 0;
         for (int i=0;i<=lstEqpmt.length;i++){
@@ -211,9 +212,9 @@ public class Magasin {
                 break;
             }
             String refTest = lstEqpmt[i].getref();
-            if (refTest.charAt(0)==type){
+            if (refTest.charAt(0) == type){
                 String sportTest = lstEqpmt[i].getsport();
-                if (sportTest.equals(sport)){
+                if (sportTest.equalsIgnoreCase(sport)){
                     tabSport[cpt] = lstEqpmt[i];
                     cpt++;
                 }
@@ -231,20 +232,20 @@ public class Magasin {
         
         while (true){
             String typeEq = "";
-            while (!typeEq.equals(" ") && !typeEq.equals("T") && !typeEq.equals("J") && !typeEq.equals("P")){
+            while (!typeEq.equalsIgnoreCase(" ") && !typeEq.equalsIgnoreCase("T") && !typeEq.equalsIgnoreCase("J") && !typeEq.equalsIgnoreCase("P")){
                 System.out.println("""
                     Veuillez choisir le type d'équipement en tapant la lettre correspondante
                     ( T = Terrain, J = Joueurs, P = ProtectionJoueurs ) puis sur 'Entrée'.
                     Ou appuyez simplement sur 'Espace' puis 'Entrée' pour arrêter la commande.""");
                 typeEq = sc.nextLine();
             }
-            if (typeEq.equals(" ")){
+            if (typeEq.equalsIgnoreCase(" ")){
                 break;
             }
             System.out.println("Veuillez maintenant choisir le sport de votre choîx.");
             String sp = sc.nextLine();
             
-            affichage(typeEq.charAt(0),sp);
+            affichage(typeEq.toUpperCase().charAt(0),sp);
             
             System.out.println("Veuillez maintenant choisir l'équipement de votre choîx en recopiant sa référence.");
             String ref = sc.nextLine();
@@ -270,7 +271,7 @@ public class Magasin {
     }
     
     public void versFichierEquipements() throws IOException{
-        FileWriter fich = new FileWriter(fichiEr);          // ouvrir le fichier en écriture
+        FileWriter fich = new FileWriter(FichierEquipements);          // ouvrir le fichier en écriture
         for (int i=0;i<lstEqpmt.length;i++){
             if (lstEqpmt[i] == null){
                 break;
@@ -283,7 +284,7 @@ public class Magasin {
     }
     
     public void depuisFichierEquipements() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(fichiEr);          // ouvrir le fichier en lecture
+        FileReader fich = new FileReader(FichierEquipements);          // ouvrir le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
         String reference = br.readLine();                          // lire une ligne du fichier
         while(reference != null){
@@ -316,11 +317,12 @@ public class Magasin {
             }
             reference = br.readLine();
         }
+        replacement();
         fich.close();
     }
     
     public void versFichierCommandes() throws IOException{
-        FileWriter fich = new FileWriter(fiChier);  // ouvrir le fichier en écriture
+        FileWriter fich = new FileWriter(FichierCommandes);  // ouvrir le fichier en écriture
         for (int i=0;i<lstCmd.length;i++){
             if (lstCmd[i] == null){
                 break;
@@ -329,6 +331,9 @@ public class Magasin {
             LigneCommande[] tabLignes = lstCmd[i].getlignes();
             String chaine = "";
             for (int j=0;j<tabLignes.length;j++){
+                if(tabLignes[j] == null){
+                    break;
+                }
                 chaine += tabLignes[j].versFichier() + System.lineSeparator();
             }
             fich.write(lignCom + System.lineSeparator() + chaine); // écire dans le fichier
@@ -337,7 +342,7 @@ public class Magasin {
     }
     
     public void depuisFichierCommandes() throws FileNotFoundException, IOException{
-        FileReader fich = new FileReader(fiChier);          // ouvrir le fichier en lecture
+        FileReader fich = new FileReader(FichierCommandes);          // ouvrir le fichier en lecture
         BufferedReader br = new BufferedReader(fich);
         String numero = br.readLine();                          // lire une ligne du fichier
         while(numero != null){
@@ -364,6 +369,7 @@ public class Magasin {
             nbCmd++;
             numero = br.readLine();
         }
+        classement();
         fich.close();
     }
     
@@ -377,22 +383,19 @@ public class Magasin {
     
     public void replacement(){
         
-        boolean k = true;
-        
         for (int i=0;i<lstEqpmt.length-1;i++){
-            if (k == false){
+            if (lstEqpmt[i+1] == null){
                 break;
             }
             for (int j=0; j<=lstEqpmt.length-1;j++){ 
                 if (lstEqpmt[j+1] == null){
-                    k = false;
                     break;
                 }
                 if (lstEqpmt[j].placeApres(lstEqpmt[j+1])){
 
                     Equipement t = lstEqpmt[j];
                     lstEqpmt[j] = lstEqpmt[j+1];
-                    lstEqpmt[j+1] = t;       
+                    lstEqpmt[j+1] = t;
                 }
             }
         }
@@ -401,9 +404,10 @@ public class Magasin {
     public void ajout(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez nous indiquer votre adresse courriel :");
-        String email = sc.nextLine();
+        String email = sc.nextLine().toLowerCase();
         System.out.println("Vous allez maintenant choisir les équipements que vous voulez acheter.");
         LigneCommande[] materiel = choixEquip();
+        tri(materiel);
         float total = 0f;
         long delai = 0L;
         for(int i=0;i<materiel.length;i++){
@@ -435,7 +439,12 @@ public class Magasin {
             }
         }
         Commande com = new Commande(num, email, emission, livraison, materiel);
+        lstCmd[nbCmd] = com;
+        System.out.println("Votre commande s'élève à un montant de " + com.gettotal() + " €.");
+        System.out.println("Elle vous sera livrée le " + com.getlivraison() + ".");
+        System.out.println("Votre numéro de commande est le : " + com.getnumero());
         nbCmd++;
+        classement();
     }
     
     public String reference(int cp){
@@ -453,13 +462,13 @@ public class Magasin {
     }
     
     public void affichage(String courriel){
-        System.out.println("Voici les commandes effectuées par "+courriel+" .");
+        System.out.println("Voici les commandes effectuées par "+courriel+" :");
         for(int i=0;i<lstCmd.length;i++){
             if(lstCmd[i]==null){
                 break;
             }
             String adresse = lstCmd[i].getemail();
-            if(courriel.equals(adresse)){
+            if(courriel.equalsIgnoreCase(adresse)){
                 System.out.println(lstCmd[i]);
             }
         }
@@ -475,6 +484,44 @@ public class Magasin {
             LocalDate test = lstCmd[i].getlivraison();
             if(test.isAfter(date)){
                 System.out.println(lstCmd[i]);
+            }
+        }
+    }
+    
+    public void classement(){
+        for (int i=0;i<lstCmd.length-1;i++){
+            if (lstCmd[i+1] == null){
+                break;
+            }
+            for (int j=0; j<=lstCmd.length-1;j++){ 
+                if (lstCmd[j+1] == null){
+                    break;
+                }
+                if (lstCmd[j].placeApres(lstCmd[j+1])){
+
+                    Commande t = lstCmd[j];
+                    lstCmd[j] = lstCmd[j+1];
+                    lstCmd[j+1] = t;
+                }
+            }
+        }
+    }
+    
+    public void tri(LigneCommande[] element){
+        for (int i=0;i<element.length-1;i++){
+            if (element[i+1] == null){
+                break;
+            }
+            for (int j=0; j<=element.length-1;j++){ 
+                if (element[j+1] == null){
+                    break;
+                }
+                if (element[j].placeApres(element[j+1])){
+
+                    LigneCommande t = element[j];
+                    element[j] = element[j+1];
+                    element[j+1] = t;
+                }
             }
         }
     }

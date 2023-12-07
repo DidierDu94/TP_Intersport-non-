@@ -49,4 +49,10 @@ public class LigneCommande {
     public String versFichier(){
         return ref + " : " + nbExempl + " : " + prixUni;
     }
+    
+    public boolean placeApres(LigneCommande autre){
+        String ref_autre = autre.getref();
+        int comp = ref.compareTo(ref_autre);
+        return comp > 0;
+    }
 }

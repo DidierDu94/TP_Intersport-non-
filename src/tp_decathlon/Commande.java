@@ -15,6 +15,7 @@ public class Commande{
     private LocalDate livraison;        // Date de livraison prévue
     private float total;                // Coût total de la commande en euros
     private LigneCommande[] lignes;     // Tableau contenant les différentes lignes de la commande
+    private int nbLignes;               // Nombre de lignes de commande dans le tableau lignes
     
     // Constructeur
     
@@ -24,16 +25,25 @@ public class Commande{
         this.email = email;
         this.emission = emission;
         this.livraison = livraison;
-        while(!livraison.isAfter(emission)){
+        while(emission.isAfter(livraison)){
             System.out.println("La date est incorrecte !");
         }
         float total = 0.0f;
         for (int i=0;i<=lignes.length-1;i++){
+            if (lignes[i] == null){
+                break;
+            }
             total += lignes[i].getprixUni() * lignes[i].getnbExempl();
         }
         this.total = total;
         this.lignes = lignes;
-        
+        nbLignes = 0;
+        for(int i=0;i<lignes.length;i++){
+            if(lignes[i] == null){
+                break;
+            }
+            nbLignes++;
+        }        
     }
     
     // Méthode toString()
@@ -77,7 +87,7 @@ public class Commande{
     */
     
     public String versFichier(){
-        return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + lignes.length;
+        return numero + System.lineSeparator() + email + " : " + emission + " : " + livraison + " : " + total + System.lineSeparator() + nbLignes;
     }
     
     public boolean placeApres(Commande autre){

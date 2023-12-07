@@ -15,7 +15,8 @@ public class ProtectionJoueurs extends Joueurs{
     public ProtectionJoueurs(String ref, String sport, String nom, float prix,
                     int nbExmpl, String taille, String coloris, String niveau){
         
-        super(ref, sport, nom, prix, nbExmpl, taille, coloris);    
+        super(ref, sport, nom, prix, nbExmpl, taille, coloris);
+        this.niveau = niveau;
     }
     
     // Méthode toString()

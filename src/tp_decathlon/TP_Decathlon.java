@@ -4,6 +4,9 @@ package tp_decathlon;
 // TDTP3: Vente d'équipements sportifs
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.Scanner;
 
 // Main class
 
@@ -11,29 +14,6 @@ public class TP_Decathlon {
 
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
-        /*Terrain t;
-        t = new Terrain("TR128", "Escalade", "Corde", 114.99f, 78, 70, 0.01f, 0.400f);
-        //System.out.println(t);
-        Joueurs j;
-        j = new Joueurs("JO032", "Natation", "Bonnet", 10, 209, "XL", "bleu");
-        //System.out.println(j);
-        ProtectionJoueurs p;
-        p = new ProtectionJoueurs("PR054", "Rugby", "Protège dents", 7.99f, 1808, "XXL", "noir", "avancé");
-        
-        
-        Equipement[] lignes = {t,j,p};
-        String tabLignes = Magasin.tableau(lignes);
-        System.out.println(tabLignes);*/
-        
-        /*String str = "TR111";
-        String sts = "TR124";
-        //int test = str;
-        //System.out.println(str.compareTo(sts));
-        System.out.println(str.charAt(0));
-        System.out.println(str.charAt(0)==sts.charAt(0));*/
-        
-        //String t[] = new String[3];
-        //System.out.println(t[2]);
         /*
         Magasin M = new Magasin("Sport2000");
         M.ajout("Escalade", "Corde", 114.99f, 78, 70, 0.01f, 0.400f);
@@ -44,17 +24,98 @@ public class TP_Decathlon {
         M.ajout("Rugby", "Maillot", 4, 2893, "XXS", "bleu");
         M.ajout("Natation", "Chariot enrouleur", 1751.22f, 23,1.6f, 3, 85);
         
-        //M.Replacement();
+        M.replacement();
         
-                    
-       
-                    // créer une vairable pour break;
-                    
-        System.out.println(M.tableau(M.choixEquip()));
+        M.versFichierEquipements();
         */
-        //M.versFichierEquipements();
-        
-        
+        Scanner sc = new Scanner(System.in);
+        Magasin M = new Magasin("Sport2000");
+        M.depuisFichierEquipements();
+        M.depuisFichierCommandes();
+        String perso = "";
+            while (!perso.equals(" ") && !perso.equals("A") && !perso.equals("F") && !perso.equals("E")){
+                System.out.println("""
+                    Qui êtes-vous ?
+                    Un acheteur ? Tapez 'A' puis 'Entrée'.
+                    Un fournisseur ? Tapez 'F' puis 'Entrée'.
+                    Un employé du magasin ? Tapez 'E' puis 'Entrée'.
+                    Si vous ne correspondez pas à ces descriptions, tapez 'Espace' puis 'Entrée'.""");
+                perso = sc.nextLine();
+                perso = perso.toUpperCase();
+            }
+            switch(perso){
+                
+                case " ":
+                    break;
+                
+                case "A":
+                    System.out.println("Vous êtes donc un acheteur.");
+                    M.ajout();
+                    break;
+                
+                case "F":
+                    System.out.println("Vous êtes donc un de nos fournisseurs.");
+                    System.out.println("Veuillez nous indiquer les informations concernant votre livraison séparées par ' : '.");
+                    String info = sc.nextLine();
+                    String[] tab = info.split(" : ");
+                    String sport = tab[0];
+                    String nom = tab[1];
+                    float prix = Float.valueOf(tab[2]);
+                    int nbExpl = Integer.valueOf(tab[3]);
+                    switch(tab.length){
+                        case 5:
+                            float poids = Float.valueOf(tab[4]);
+                            M.ajout(sport, nom, prix, nbExpl, poids);
+                            break;
+                        case 6:
+                            String taille = tab[4];
+                            String coloris = tab[5];
+                            M.ajout(sport, nom, prix, nbExpl, taille, coloris);
+                            break;
+                        case 7:
+                            if(tab[4].getClass().getSimpleName().equalsIgnoreCase("float")){
+                                float hauteur = Float.valueOf(tab[4]);
+                                float largeur = Float.valueOf(tab[5]);
+                                poids = Float.valueOf(tab[6]);
+                                M.ajout(sport, nom, prix, nbExpl, hauteur, largeur, poids);
+                                break;
+                            }else{
+                                taille = tab[4];
+                                coloris = tab[5];
+                                String niveau = tab[6];
+                                M.ajout(sport, nom, prix, nbExpl, taille, coloris, niveau);
+                                break;
+                            }
+                    }
+                    break;
+                
+                case "E":
+                    System.out.println("Vous êtes donc employé chez nous.");
+                    String but = "";
+                    while (!but.equalsIgnoreCase("C") && !but.equalsIgnoreCase("D")){
+                        System.out.print("""
+    Que souhaitez-vous faire ?
+    Voir la liste des commandes selon la collectivité ? Tapez 'C' puis 'Entrée'.
+    Voir la liste des commandes à livrer après une date particulière ? """);
+                        System.out.println("Tapez 'D' puis 'Entrée'.");
+                        but = sc.nextLine();
+                    }
+                    if(but.equalsIgnoreCase("C")){
+                        System.out.println("Veuillez indiquer le courriel de la collectivité recherchée.");
+                        String adresse = sc.nextLine();
+                        M.affichage(adresse);
+                        break;
+                    }else{
+                        System.out.println("Veuillez indiquer la date voulue séparé par '-' (exemple : 1963-11-22).");
+                        String[] date = sc.nextLine().split("-");
+                        LocalDate limit = LocalDate.of(Integer.valueOf(date[0]), Integer.valueOf(date[1]), Integer.valueOf(date[2]));
+                        M.affichage(limit);
+                        break;
+                    }
+            }
+            
+            M.versFichierEquipements();
+            M.versFichierCommandes();
         
     }
     
